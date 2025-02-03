@@ -1,0 +1,32 @@
+:root {
+  --background-color: #fff;
+  --background-light: #fff;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --primary-color: #404040;
+  --text-color: #0a0a0a;
+  --text-light: #575757;
+  --font-size: 16px;
+  --animation-speed: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  object-fit: cover;
+}
+body {
+  font-size: var(--font-size);
+  font-family: "Roboto", sans-serif;
+  padding-top: 55px;
+  background-color: var(--background-light);
+}
+a {
+  text-decoration: none;
+}
+p {
+  font-weight: bolder;
+  color: var(--primary-color);
+}
