@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const signupValidation = (req, res, next) => {
+const signinValidation = (req, res, next) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required(),
     email: Joi.string().email().required(),
@@ -23,7 +23,5 @@ const loginValidation = (req, res, next) => {
   }
   next();
 };
-module.exports = {
-  signupValidation,
-  loginValidation,
-};
+
+export { signinValidation, loginValidation };
