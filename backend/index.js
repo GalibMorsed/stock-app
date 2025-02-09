@@ -1,21 +1,21 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import AuthRouter from "./Routes/authRouter.js";
-import ProductRouter from "./Routes/productRouter.js";
-import dotenv from "dotenv";
-import "./Models/db.js";
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const AuthRouter = require("./Routes/authRouter");
+const ProductRouter = require("./Routes/productRouter");
+const dotenv = require("dotenv");
+require("./Models/db");
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 6060;
 
 console.log(`PORT: ${process.env.PORT}`);
 console.log(`MONGO_CONN: ${process.env.MONGO_CONN}`);
 console.log(`JWT_SECRET: ${process.env.JWT_SECRET}`);
 
 app.get("/ping", (req, res) => {
-  res.send("PONG");
+  res.send("PONG adlhalg ldajhdall algdjk");
 });
 
 app.use(bodyParser.json());

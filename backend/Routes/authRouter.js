@@ -1,13 +1,13 @@
-import { signin, login } from "../Controllers/AuthController.js";
-import {
+const { signin, login } = require("../Controllers/AuthController");
+const {
   signinValidation,
   loginValidation,
-} from "../Middlewares/AuthValidation.js";
-import { Router } from "express";
+} = require("../Middlewares/authValidation");
+const { Router } = require("express");
 
 const router = Router();
 
 router.post("/login", loginValidation, login);
-router.post("/signup", signinValidation, signin);
+router.post("/signin", signinValidation, signin);
 
-export default router;
+module.exports = router;

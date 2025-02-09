@@ -1,4 +1,4 @@
-import Joi from "joi";
+const Joi = require("joi");
 
 const signinValidation = (req, res, next) => {
   const schema = Joi.object({
@@ -24,4 +24,4 @@ const loginValidation = (req, res, next) => {
   next();
 };
 
-export { signinValidation, loginValidation };
+module.exports = { signinValidation, loginValidation };

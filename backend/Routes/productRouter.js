@@ -1,6 +1,5 @@
-import ensureAuthenticated from "../Middlewares/Auth";
-
-import express from "express";
+const ensureAuthenticated = require("../Middlewares/Auth");
+const express = require("express");
 const router = express.Router();
 
 router.get("/", ensureAuthenticated, (req, res) => {
@@ -17,4 +16,4 @@ router.get("/", ensureAuthenticated, (req, res) => {
   ]);
 });
 
-export default router;
+module.exports = router;

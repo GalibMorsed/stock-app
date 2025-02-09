@@ -30,7 +30,7 @@ function SigninPage() {
     }
 
     try {
-      const url = "http://localhost:8080/auth/signin";
+      const url = "http://localhost:6060/auth/signin";
       const response = await fetch(url, {
         method: "POST",
         headers: {
