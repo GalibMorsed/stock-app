@@ -56,46 +56,51 @@ function SigninPage() {
   };
 
   return (
-    <div className="container">
-      <h1>Signup</h1>
-      <form onSubmit={handleSignup}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            onChange={handleChange}
-            type="text"
-            name="name"
-            autoFocus
-            placeholder="Enter your name..."
-            value={signupInfo.name}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            onChange={handleChange}
-            type="email"
-            name="email"
-            placeholder="Enter your email..."
-            value={signupInfo.email}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            onChange={handleChange}
-            type="password"
-            name="password"
-            placeholder="Enter your password..."
-            value={signupInfo.password}
-          />
-        </div>
-        <button type="submit">Signup</button>
-        <span>
-          Already have an account? <Link to="/login">Login</Link>
-        </span>
-      </form>
-      <ToastContainer />
+    <div className="wholeConatiner">
+      <h1 className="logo">StockNest</h1>
+      <div className="auth-container">
+        <h1>Signup Here</h1>
+        <form onSubmit={handleSignup}>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              onChange={handleChange}
+              type="text"
+              name="name"
+              autoFocus
+              placeholder="Enter your name..."
+              value={signupInfo.name}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              onChange={handleChange}
+              type="email"
+              name="email"
+              placeholder="Enter your email..."
+              value={signupInfo.email}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              onChange={handleChange}
+              type="password"
+              name="password"
+              placeholder="Enter your password..."
+              value={signupInfo.password}
+            />
+          </div>
+          <button className="auth-btn" type="submit">
+            Signup
+          </button>
+          <span>
+            Already have an account? <Link to="/login">Login</Link>
+          </span>
+        </form>
+        <ToastContainer />
+      </div>
     </div>
   );
 }

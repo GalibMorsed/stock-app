@@ -20,7 +20,7 @@ function HomePage() {
   return (
     <div className="container">
       <h1>Welcome {loggedInUser} to the Home Page</h1>
-      <button onClick={handleLogout} className="logout-btn">
+      <button onClick={handleLogout} className="btn">
         Logout
       </button>
     </div>
