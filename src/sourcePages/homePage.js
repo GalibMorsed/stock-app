@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import MainPgae from "../homeComponents/mainPage";
+import Sidebar from "../homeComponents/sidebar";
 
-function HomePage() {
-  const navigate = useNavigate();
-  const [loggedInUser, setLoggedInUser] = useState("");
-  useEffect(() => {
-    setLoggedInUser(localStorage.getItem("loggedInUser"));
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loggedInUser");
-    setTimeout(() => {
-      navigate("/login");
-    }, 1000);
-    // Redirect to login page
-  };
-
+export default function homePage() {
   return (
-    <div className="container">
-      <h1>Welcome {loggedInUser} to the Home Page</h1>
-      <button onClick={handleLogout} className="btn">
-        Logout
-      </button>
+    <div>
+      <MainPgae />
+      <Sidebar />
     </div>
   );
 }
-
-export default HomePage;
