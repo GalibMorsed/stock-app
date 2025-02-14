@@ -1,0 +1,56 @@
+.navbar {
+  height: 65px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa; // Lighter shade for a clean look
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  width: calc(100% - 350px); // Adjust width considering sidebar width
+  left: 350px; // Push the navbar after the sidebar
+  top: 0;
+  z-index: 998;
+  transition: all 0.3s ease-in-out;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; // Adds spacing between image and name
+
+    .img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: url("../../public/userImg.avif") center/cover no-repeat;
+      border: 2px solid #ddd;
+    }
+
+    .name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+  }
+
+  .logout-btn {
+    margin-left: auto; // Pushes the logout button to the right
+    display: flex;
+    align-items: center;
+
+    .btn {
+      background: #ff4d4d;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #e60000;
+      }
+    }
+  }
+}

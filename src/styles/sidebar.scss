@@ -6,7 +6,9 @@
   top: 0;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
-  background: black;
+  z-index: 999;
+  background-color: var(--background-color);
+  box-shadow: 0 0 0 1300px rgba(0, 0, 0, 0), 3px 0 5px var(--shadow-color);
 
   .toggle-btn {
     position: absolute;
