@@ -1,6 +1,6 @@
-.sidebar {
-  width: 350px;
-  height: 100vh;
+.sidebar-nav {
+  width: 330px;
+  height: 9.5vh;
   position: fixed;
   left: 0;
   top: 0;
@@ -10,28 +10,54 @@
   background-color: var(--background-color);
   box-shadow: 0 0 0 1300px rgba(0, 0, 0, 0), 3px 0 5px var(--shadow-color);
 
-  .toggle-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 1.5rem;
+  .web-name {
+    text-align: center;
+    margin: 0;
+    padding: 15px 0;
+    color: var(--text-color);
   }
 
-  .note-list {
-    list-style: none;
-    padding: 20px;
+  .sidebar {
+    width: 330px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 80px;
+    transition: width 0.3s ease-in-out;
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Hides horizontal overflow */
+    z-index: 999;
+    background-color: var(--background-color);
+    box-shadow: 0 0 0 1300px rgba(0, 0, 0, 0), 3px 0 5px var(--shadow-color);
 
-    li {
-      padding: 10px 0;
-      text-align: left;
+    .note-list {
+      list-style: none;
+      padding: 20px;
 
-      a {
-        text-decoration: none;
-        display: block;
+      li {
+        text-align: center;
+        padding: 14px;
+        border-bottom: 1px solid #ccc;
+        color: #555;
+        cursor: pointer;
       }
     }
   }
+}
+
+@media (max-width: 700px) {
+  .sidebar-nav {
+    display: none;
+  }
+
+  .main-section {
+    margin-left: 0;
+  }
+}
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: #a6a6a6;
+  border-radius: 10px;
 }

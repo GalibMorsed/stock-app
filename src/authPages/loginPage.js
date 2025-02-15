@@ -89,7 +89,7 @@ function LoginPage() {
             <Link to="/">Forgot Password?</Link>
           </span>
           <span>
-            New in StockNest? <Link to="/signin"> Create Account</Link>
+            Don't have an account? <Link to="/signin"> Create Account</Link>
           </span>
         </form>
         <ToastContainer />
