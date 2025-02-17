@@ -2,8 +2,6 @@
   width: 330px;
   height: 9.5vh;
   position: fixed;
-  left: 0;
-  top: 0;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
   z-index: 999;
@@ -24,8 +22,8 @@
     left: 0;
     top: 80px;
     transition: width 0.3s ease-in-out;
-    overflow-y: auto; /* Enables vertical scrolling */
-    overflow-x: hidden; /* Hides horizontal overflow */
+    overflow-y: auto;
+    overflow-x: hidden;
     z-index: 999;
     background-color: var(--background-color);
     box-shadow: 0 0 0 1300px rgba(0, 0, 0, 0), 3px 0 5px var(--shadow-color);
@@ -45,7 +43,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .sidebar-nav {
     display: none;
   }

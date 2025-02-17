@@ -1,9 +1,44 @@
-.message {
+.home-section {
+  height: 100%;
+  width: 750px;
   color: var(--text-color);
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: fixed;
+  top: 11%;
+  left: 31%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+// Media queries for responsiveness
+@media (max-width: 1200px) {
+  .home-section {
+    width: 700px;
+    left: 32.5%;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-section {
+    width: 440px;
+    left: 43.5%;
+    top: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-section {
+    width: 100%;
+    left: 0;
+    top: 80px;
+    position: relative;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-section {
+    width: 100%;
+    top: 80px;
+    position: relative;
+  }
 }

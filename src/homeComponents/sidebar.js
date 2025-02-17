@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ close }) {
   return (
     <>
-      <div className="sidebar-nav">
+      <div className="sidebar-nav" onClick={close}>
         <h1 className="web-name">StockNest</h1>
         <div className="sidebar">
           <ul className="note-list">
