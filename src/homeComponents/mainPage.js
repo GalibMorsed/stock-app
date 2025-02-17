@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./sidebar";
 
-export default function MainPgae() {
+export default function MainPage() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
   const toggleSidebar = () => {
@@ -15,8 +15,10 @@ export default function MainPgae() {
       <div className="sidebar-btn" onClick={toggleSidebar}>
         <FontAwesomeIcon icon={isSidebarVisible ? faTimes : faBars} />
       </div>
-      {isSidebarVisible && <Sidebar close={toggleSidebar} />}
-      <div className="message">hey bitch do your work</div>
+
+      <Sidebar isVisible={isSidebarVisible} close={toggleSidebar} />
+
+      <div className="message">Hey, do your work!</div>
     </div>
   );
 }
