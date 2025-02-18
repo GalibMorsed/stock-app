@@ -2,7 +2,7 @@
   width: 330px;
   height: 9.5vh;
   position: fixed;
-  transition: width 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out;
   overflow: hidden;
   z-index: 999;
   background-color: var(--background-color);
@@ -44,13 +44,20 @@
 }
 
 @media (max-width: 768px) {
+  .sidebar-nav {
+    display: none;
+  }
   .sidebar-nav,
   .sidebar-nav .sidebar-info {
     width: 100%;
     top: 30vh;
   }
-  .sidebar-nav {
+  .sidebar-nav.show {
+    display: block;
+    width: 100%;
     top: 20vh;
+    right: 0;
+    box-shadow: 0 0 80px rgb(0, 0, 0);
   }
 
   .main-section {
@@ -64,31 +71,3 @@
   background: #a6a6a6;
   border-radius: 10px;
 }
-/*.sidebar-nav {
-  position: fixed;
-  top: 0;
-  left: -300px;  // Sidebar is off-screen when hidden
-  width: 300px;
-  height: 100vh;
-  background-color: #333;
-  color: white;
-  transition: left 0.3s ease-in-out;  // Smooth animation
-}
-
-.sidebar-nav.show {
-  left: 0;  // Sidebar slides into view
-}
-
-.sidebar-nav.hide {
-  left: -300px;  // Sidebar slides out
-}
-
-.sidebar-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1000; // Ensures button is always on top
-}
-*/

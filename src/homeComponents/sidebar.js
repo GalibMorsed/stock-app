@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Sidebar({ isVisible, close }) {
+export default function Sidebar({ isOpen, close }) {
   return (
     <>
-      <div className={`sidebar-nav ${isVisible ? "show" : "hide"}`}>
+      <div className={`sidebar-nav ${isOpen ? "show" : "hide"}`}>
         <h1 className="web-name">StockNest</h1>
         <div className="sidebar-info">
           <ul className="note-list">

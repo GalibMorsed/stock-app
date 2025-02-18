@@ -4,21 +4,22 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./sidebar";
 
 export default function MainPage() {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isSidebarOpen, setIsSidebarVisible] = useState(false);
 
   const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
+    setIsSidebarVisible(!isSidebarOpen);
   };
 
   return (
     <div className="home-section">
-      <div className="sidebar-btn" onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={isSidebarVisible ? faTimes : faBars} />
+      <div className="sidebar-message">
+        <div className="sidebar-btn" onClick={toggleSidebar}>
+          <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} />
+        </div>
+        <Sidebar isOpen={isSidebarOpen} close={toggleSidebar} />
+
+        <div className="message">Hey, Check Your Created Stocks</div>
       </div>
-
-      <Sidebar isVisible={isSidebarVisible} close={toggleSidebar} />
-
-      <div className="message">Hey, do your work!</div>
     </div>
   );
 }

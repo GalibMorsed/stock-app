@@ -5,9 +5,27 @@
   position: fixed;
   top: 11%;
   left: 31%;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  p {
+    color: var(--text-color);
+  }
+}
+.sidebar-message {
+  display: none;
+  .sidebar-btn {
+    font-size: 30px;
+    margin-right: 10px;
+    position: absolute;
+    left: 30px;
+  }
+  .message {
+    position: absolute;
+    top: 6px;
+    font-weight: bolder;
+    left: 14vh;
+  }
 }
 
 // Media queries for responsiveness
@@ -32,6 +50,9 @@
     left: 0;
     top: 80px;
     position: relative;
+  }
+  .sidebar-message {
+    display: flex;
   }
 }
 
