@@ -1,14 +1,16 @@
 import React from "react";
-import MainPgae from "../homeComponents/mainPage";
+import MainPage from "../homeComponents/mainPage";
 import Navbar from "../homeComponents/navbar";
 import Sidebar from "../homeComponents/sidebar";
+import Footer from "../homeComponents/footer";
 
 export default function homePage() {
   return (
     <div>
-      <MainPgae />
+      <MainPage />
       <Navbar />
       <Sidebar />
+      <Footer />
     </div>
   );
 }
