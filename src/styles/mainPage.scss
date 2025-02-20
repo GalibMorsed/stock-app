@@ -99,6 +99,7 @@
     left: 0;
     top: 80px;
     position: relative;
+    min-height: calc(110vh - 65px);
   }
   .sidebar-message {
     display: flex;
@@ -111,6 +112,7 @@
     width: 100%;
     top: 80px;
     position: relative;
+    min-height: calc(110vh - 65px);
   }
 }
 
@@ -122,6 +124,7 @@
     padding: 15px;
     position: relative;
     box-shadow: none;
+    min-height: calc(130vh - 65px);
   }
 
   .button-container {

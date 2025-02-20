@@ -56,19 +56,19 @@
   }
 
   @media (max-width: 1200px) {
-    width: calc(100% - 300px);
-    left: 250px;
+    width: calc(93% - 300px);
+    left: 350px;
   }
 
   @media (max-width: 992px) {
-    width: calc(100% - 200px);
-    left: 150px;
+    width: calc(93% - 300px);
+    left: 350px;
   }
 
   @media (max-width: 768px) {
+    position: relative;
     width: 100%;
     left: 0;
-    padding: 0 10px;
     height: auto;
     padding: 10px;
 
