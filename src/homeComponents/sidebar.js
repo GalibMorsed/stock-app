@@ -8,14 +8,16 @@ export default function Sidebar({ isOpen, close }) {
         <div className="sidebar-info">
           <ul className="note-list">
             <h2>Created Stocks</h2>
-            <li>gakaDJHGKHDALSKC</li>
-            <li>dlcskhdbcjahvak</li>
-            <li>askhdbcakshdbla</li>
-            <li>scdklbcksdhbcjascv</li>
-            <li>78946512379456132</li>
-            <li>wertyuiknbvcxzsdfghjmdsgdyacbh</li>
-            <li>gakaDJHGKHDALSKC</li>
-            <li>dlcskhdbcjahvak</li>
+            <li>StockFlow Manager</li>
+            <li>InvTrack Pro</li>
+            <li>SmartStock Hub</li>
+            <li>VaultSync Inventory</li>
+            <li>StockEase System</li>
+            <li>SwiftInventory Tracker</li>
+            <li>StashTrack Solutions</li>
+            <li>PrimeStock Control</li>
+            <li>SupplySync Pro</li>
+            <li>WareTrack Manager</li>
           </ul>
         </div>
       </div>
