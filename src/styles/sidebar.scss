@@ -31,12 +31,13 @@
     .note-list {
       list-style: none;
       padding: 20px;
+      display: block; /* Ensure the list is always visible */
 
       li {
-        text-align: center;
-        padding: 14px;
+        text-align: left;
+        padding: 10px;
         border-bottom: 1px solid #ccc;
-        color: #555;
+        color: #333;
         cursor: pointer;
       }
     }
@@ -62,6 +63,10 @@
 
   .main-section {
     margin-left: 0;
+  }
+
+  .sidebar-info .note-list {
+    display: block; /* Ensure visibility on smaller screens */
   }
 }
 .sidebar::-webkit-scrollbar {
