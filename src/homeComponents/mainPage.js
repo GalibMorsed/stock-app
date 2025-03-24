@@ -20,8 +20,14 @@ export default function MainPage() {
 
   const createStock = () => {
     if (stockName.trim() !== "" && selectedDate.trim() !== "") {
-      const newStock = { name: stockName, date: selectedDate };
-      setStocks((prevStocks) => [...prevStocks, newStock]);
+      setStocks((prevStocks) => {
+        const updatedStocks = [
+          ...prevStocks,
+          { name: stockName, date: selectedDate },
+        ];
+        console.log("New Stock List:", updatedStocks); // ✅ Debugging log
+        return updatedStocks;
+      });
       setStockName("");
       setSelectedDate("");
       setStockFormVisible(false);
