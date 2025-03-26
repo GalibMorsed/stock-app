@@ -1,19 +1,16 @@
-const ensureAuthenticated = require("../Middlewares/Auth");
-const express = require("express");
-const router = express.Router();
+const { storeData, getUserData } = require("../Controllers/productController");
+const {
+  signinValidation,
+  loginValidation,
+} = require("../Middlewares/authValidation");
+const { Router } = require("express");
 
-router.get("/", ensureAuthenticated, (req, res) => {
-  console.log("---- logged in user detail ---", req.user);
-  res.status(200).json([
-    {
-      name: "mobile",
-      price: 10000,
-    },
-    {
-      name: "tv",
-      price: 20000,
-    },
-  ]);
-});
+const router = Router();
+
+// Debugging: Log the imported values to ensure they are functions
+console.log(typeof storeData, typeof getUserData, typeof authenticateUser);
+
+router.post("/store", loginValidation, signinValidation, storeData);
+router.get("/user-data", loginValidation, signinValidation, getUserData);
 
 module.exports = router;

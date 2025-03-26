@@ -9,6 +9,7 @@ export default function MainPage() {
   const [stocks, setStocks] = useState([]);
   const [stockName, setStockName] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+  const [loading, setLoading] = useState(false); // Added loading state
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarOpen);
@@ -18,19 +19,49 @@ export default function MainPage() {
     setStockFormVisible(true);
   };
 
-  const createStock = () => {
+  const createStock = async () => {
     if (stockName.trim() !== "" && selectedDate.trim() !== "") {
-      setStocks((prevStocks) => {
-        const updatedStocks = [
-          ...prevStocks,
-          { name: stockName, date: selectedDate },
-        ];
-        console.log("New Stock List:", updatedStocks); // ✅ Debugging log
-        return updatedStocks;
-      });
-      setStockName("");
-      setSelectedDate("");
-      setStockFormVisible(false);
+      setLoading(true);
+      try {
+        let loggedInUser = localStorage.getItem("loggedInUser");
+        try {
+          loggedInUser = JSON.parse(loggedInUser);
+        } catch (e) {
+          throw new Error("Invalid loggedInUser data in localStorage");
+        }
+
+        if (!loggedInUser || !loggedInUser.id) {
+          throw new Error("Logged-in user ID not found");
+        }
+
+        const response = await fetch("http://localhost:6060/auth/store", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: loggedInUser.id,
+            platformName: stockName,
+            data: selectedDate,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          console.error(`Error: ${response.status} - ${errorMessage}`);
+          throw new Error("Failed to create stock");
+        }
+
+        const newStock = await response.json();
+        setStocks((prevStocks) => [...prevStocks, newStock]);
+        setStockName("");
+        setSelectedDate("");
+        setStockFormVisible(false);
+      } catch (error) {
+        console.error("Error creating stock:", error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -86,8 +117,8 @@ export default function MainPage() {
             onChange={(e) => setSelectedDate(e.target.value)}
           />
           <div className="create-btn">
-            <button className="btn" onClick={createStock}>
-              Create
+            <button className="btn" onClick={createStock} disabled={loading}>
+              {loading ? "Creating..." : "Create"}
             </button>
             <button
               className="btn cancel"
