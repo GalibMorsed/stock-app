@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const stocksCreated = new Schema({
-  userId: {
+  name: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,

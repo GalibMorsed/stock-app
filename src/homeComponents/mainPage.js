@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./sidebar";
@@ -9,7 +9,12 @@ export default function MainPage() {
   const [stocks, setStocks] = useState([]);
   const [stockName, setStockName] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-  const [loading, setLoading] = useState(false); // Added loading state
+  const [name, setLoggedInUser] = useState("");
+
+  useEffect(() => {
+    const user = localStorage.getItem("loggedInUser");
+    setLoggedInUser(user || "");
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarOpen);
@@ -20,49 +25,47 @@ export default function MainPage() {
   };
 
   const createStock = async () => {
-    if (stockName.trim() !== "" && selectedDate.trim() !== "") {
-      setLoading(true);
-      try {
-        let loggedInUser = localStorage.getItem("loggedInUser");
-        try {
-          loggedInUser = JSON.parse(loggedInUser);
-        } catch (e) {
-          throw new Error("Invalid loggedInUser data in localStorage");
-        }
-
-        if (!loggedInUser || !loggedInUser.id) {
-          throw new Error("Logged-in user ID not found");
-        }
-
-        const response = await fetch("http://localhost:6060/auth/store", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: loggedInUser.id,
-            platformName: stockName,
-            data: selectedDate,
-          }),
-        });
-
-        if (!response.ok) {
-          const errorMessage = await response.text();
-          console.error(`Error: ${response.status} - ${errorMessage}`);
-          throw new Error("Failed to create stock");
-        }
-
-        const newStock = await response.json();
-        setStocks((prevStocks) => [...prevStocks, newStock]);
-        setStockName("");
-        setSelectedDate("");
-        setStockFormVisible(false);
-      } catch (error) {
-        console.error("Error creating stock:", error);
-      } finally {
-        setLoading(false);
-      }
+    if (stockName.trim() === "") {
+      alert("Stock name cannot be empty.");
+      return;
     }
+
+    if (!name) {
+      alert("User not found! Please log in.");
+      return;
+    }
+
+    const newStock = { name, stock: stockName, date: selectedDate };
+
+    // Log the newStock object for debugging
+    console.log("Creating stock with data:", newStock);
+
+    try {
+      const url = "http://localhost:6060/product/store";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newStock),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setStocks([...stocks, result.stock]);
+        alert("Stock created successfully!");
+      } else {
+        console.error("Server error:", result);
+        alert(result.error || "Failed to create stock");
+      }
+    } catch (error) {
+      console.error("Error creating stock:", error);
+      alert("Error creating stock");
+    }
+
+    setStockName("");
+    setSelectedDate("");
+    setStockFormVisible(false);
   };
 
   return (
@@ -71,12 +74,8 @@ export default function MainPage() {
         <div className="sidebar-btn" onClick={toggleSidebar}>
           <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} />
         </div>
-        <Sidebar
-          stocks={stocks || []}
-          isOpen={isSidebarOpen}
-          close={toggleSidebar}
-        />
-        <div className="message">Hey, Check Your Stock Report</div>
+        <Sidebar isOpen={isSidebarOpen} close={toggleSidebar} />
+        <div className="message">Hey, {name} Check Your Stock Report</div>
       </div>
 
       <div className="button-container">
@@ -117,8 +116,8 @@ export default function MainPage() {
             onChange={(e) => setSelectedDate(e.target.value)}
           />
           <div className="create-btn">
-            <button className="btn" onClick={createStock} disabled={loading}>
-              {loading ? "Creating..." : "Create"}
+            <button className="btn" onClick={createStock}>
+              Create
             </button>
             <button
               className="btn cancel"
