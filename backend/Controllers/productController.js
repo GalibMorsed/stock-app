@@ -5,7 +5,7 @@ const storeData = async (req, res) => {
     const { data } = req.body;
 
     const newEntry = new CreatedStocks({
-      userId: req.user.id, // Extracted from token
+      userId: req.user.id,
       data,
     });
 

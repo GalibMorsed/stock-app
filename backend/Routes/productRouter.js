@@ -1,8 +1,5 @@
 const { storeData, getUserData } = require("../Controllers/productController");
-const {
-  signinValidation,
-  loginValidation,
-} = require("../Middlewares/authValidation");
+const { productValidation } = require("../Middlewares/productValidation");
 const { Router } = require("express");
 
 const router = Router();
@@ -10,7 +7,7 @@ const router = Router();
 // Debugging: Log the imported values to ensure they are functions
 console.log(typeof storeData, typeof getUserData, typeof authenticateUser);
 
-router.post("/store", loginValidation, signinValidation, storeData);
-router.get("/user-data", loginValidation, signinValidation, getUserData);
+router.post("/store", productValidation, storeData);
+router.get("/user-data", productValidation, getUserData);
 
 module.exports = router;
