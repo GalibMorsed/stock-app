@@ -1,13 +1,13 @@
-const { storeData, getUserData } = require("../Controllers/productController");
+const { storeData, userData } = require("../Controllers/productController");
 const { productValidation } = require("../Middlewares/productValidation");
 const { Router } = require("express");
 
 const router = Router();
 
 // Debugging: Log the imported values to ensure they are functions
-console.log(typeof storeData, typeof getUserData, typeof authenticateUser);
+console.log(typeof storeData, typeof userData, typeof authenticateUser);
 
-router.post("/store", productValidation, storeData);
-router.get("/user-data", productValidation, getUserData);
+router.post("/storeData", productValidation, storeData);
+router.get("/userdata", productValidation, userData);
 
 module.exports = router;

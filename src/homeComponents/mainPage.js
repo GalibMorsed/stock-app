@@ -41,7 +41,7 @@ export default function MainPage() {
     console.log("Creating stock with data:", newStock);
 
     try {
-      const url = "http://localhost:6060/product/store";
+      const url = "http://localhost:6060/product/storeData";
       const response = await fetch(url, {
         method: "POST",
         headers: {

@@ -8,7 +8,7 @@ const signin = async (req, res) => {
     const user = await UserModel.findOne({ email });
     if (user) {
       return res.status(409).json({
-        message: "User is already exist, you can login",
+        message: "User already exists, please login",
         success: false,
       });
     }
@@ -16,12 +16,12 @@ const signin = async (req, res) => {
     userModel.password = await bcrypt.hash(password, 10);
     await userModel.save();
     res.status(201).json({
-      message: "Signup successfully",
+      message: "Signup successful",
       success: true,
     });
   } catch (err) {
     res.status(500).json({
-      message: "Internal server errror",
+      message: "Internal server error",
       success: false,
     });
   }
@@ -31,7 +31,7 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
-    const errorMsg = "Auth failed email or password is wrong";
+    const errorMsg = "Authentication failed: email or password is incorrect"; // Improved message
     if (!user) {
       return res.status(403).json({ message: errorMsg, success: false });
     }
@@ -46,7 +46,7 @@ const login = async (req, res) => {
     );
 
     res.status(200).json({
-      message: "Login Success",
+      message: "Login successful",
       success: true,
       jwtToken,
       email,
@@ -54,7 +54,7 @@ const login = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: "Internal server errror",
+      message: "Internal server error",
       success: false,
     });
   }

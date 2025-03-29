@@ -17,4 +17,5 @@ const stocksCreated = new Schema({
   },
 });
 
-module.exports = mongoose.model("CreatedStocks", stocksCreated);
+const productModel = mongoose.model("CreatedStocks", stocksCreated);
+module.exports = productModel;
