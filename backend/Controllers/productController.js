@@ -2,18 +2,22 @@ const CreatedStocks = require("../Models/product");
 
 const storeData = async (req, res) => {
   try {
-    const { userId, data } = req.body; // Extract userId from request body
+    const { name, stock, date } = req.body;
 
-    if (!userId) {
+    if (!name) {
       return res.status(401).json({ message: "Unauthorized: User ID missing" });
     }
-    if (!data) {
+    if (!stock) {
+      return res.status(400).json({ message: "Data field is required" });
+    }
+    if (!date) {
       return res.status(400).json({ message: "Data field is required" });
     }
 
     const newEntry = new CreatedStocks({
-      userId,
-      data,
+      name,
+      stock,
+      date,
     });
 
     await newEntry.save();
@@ -30,13 +34,12 @@ const storeData = async (req, res) => {
 
 const userData = async (req, res) => {
   try {
-    const { userId } = req.body; // Extract userId from request body
-
-    if (!userId) {
+    const { name } = req.body;
+    if (!name) {
       return res.status(401).json({ message: "Unauthorized: User ID missing" });
     }
 
-    const userData = await CreatedStocks.find({ userId });
+    const userData = await CreatedStocks.find({ name });
     res.json(userData);
   } catch (error) {
     console.error("Error in userData:", error);

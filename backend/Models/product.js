@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const stocksCreated = new Schema({
   name: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.String,
     ref: "User",
     required: true,
   },

@@ -3,31 +3,31 @@ import React, { useEffect, useState } from "react";
 export default function Sidebar({ isOpen, close }) {
   const [userData, setUserData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const userId = localStorage.getItem("LoggedInUser");
-      if (!userId) return;
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const userId = localStorage.getItem("LoggedInUser");
+  //     if (!userId) return;
 
-      try {
-        const response = await fetch("http://localhost:6060/product/userData", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId }),
-        });
+  //     try {
+  //       const response = await fetch("http://localhost:6060/product/userData", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ userId }),
+  //       });
 
-        const data = await response.json();
-        if (response.ok) {
-          setUserData(data);
-        } else {
-          console.error("Error fetching data:", data.message);
-        }
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    };
+  //       const data = await response.json();
+  //       if (response.ok) {
+  //         setUserData(data);
+  //       } else {
+  //         console.error("Error fetching data:", data.message);
+  //       }
+  //     } catch (error) {
+  //       console.error("Fetch error:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <div className={`sidebar-nav ${isOpen ? "show" : "hide"}`}>

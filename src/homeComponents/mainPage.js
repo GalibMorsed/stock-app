@@ -37,7 +37,6 @@ export default function MainPage() {
 
     const newStock = { name, stock: stockName, date: selectedDate };
 
-    // Log the newStock object for debugging
     console.log("Creating stock with data:", newStock);
 
     try {
