@@ -6,6 +6,7 @@ import Sidebar from "./sidebar";
 export default function MainPage() {
   const [isSidebarOpen, setIsSidebarVisible] = useState(false);
   const [isStockFormVisible, setStockFormVisible] = useState(false);
+  const [totalStocks, setTotalStocks] = useState(0);
   const [stocks, setStocks] = useState([]);
   const [stockName, setStockName] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
@@ -52,6 +53,7 @@ export default function MainPage() {
       const result = await response.json();
       if (response.ok) {
         setStocks([...stocks, result.stock]);
+        setTotalStocks(totalStocks + 1); // Update total stocks count
         alert("Stock created successfully!");
       } else {
         console.error("Server error:", result);
@@ -73,7 +75,11 @@ export default function MainPage() {
         <div className="sidebar-btn" onClick={toggleSidebar}>
           <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} />
         </div>
-        <Sidebar isOpen={isSidebarOpen} close={toggleSidebar} />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          close={toggleSidebar}
+          updateTotalStocks={setTotalStocks}
+        />
         <div className="message">Hey, {name} Check Your Stock Report</div>
       </div>
 
@@ -93,7 +99,7 @@ export default function MainPage() {
 
       <div className="inventory-info">
         <p>Inventory Summary</p>
-        <p>Total Stocks Created - {stocks.length}</p>
+        <p>Total Stocks Created - {totalStocks}</p>
         <p>Total Sale - 43</p>
       </div>
 

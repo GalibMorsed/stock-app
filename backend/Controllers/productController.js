@@ -4,14 +4,8 @@ const storeData = async (req, res) => {
   try {
     const { name, stock, date } = req.body;
 
-    if (!name) {
+    if (!name || !stock || !date) {
       return res.status(401).json({ message: "Unauthorized: User ID missing" });
-    }
-    if (!stock) {
-      return res.status(400).json({ message: "Data field is required" });
-    }
-    if (!date) {
-      return res.status(400).json({ message: "Data field is required" });
     }
 
     const newEntry = new CreatedStocks({
@@ -34,13 +28,17 @@ const storeData = async (req, res) => {
 
 const userData = async (req, res) => {
   try {
-    const { name } = req.body;
+    const name = req.query.name; // Fetching from URL parameter
     if (!name) {
-      return res.status(401).json({ message: "Unauthorized: User ID missing" });
+      return res.status(400).json({ message: "User name is required" });
     }
 
-    const userData = await CreatedStocks.find({ name });
-    res.json(userData);
+    const stocks = await CreatedStocks.find({ name });
+    if (!stocks.length) {
+      return res.status(404).json({ message: "No data found for this user" });
+    }
+
+    res.status(200).json(stocks);
   } catch (error) {
     console.error("Error in userData:", error);
     res.status(500).json({
@@ -50,7 +48,6 @@ const userData = async (req, res) => {
     });
   }
 };
-
 module.exports = {
   storeData,
   userData,

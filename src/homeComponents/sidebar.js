@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from "react";
 
-export default function Sidebar({ isOpen, close }) {
+export default function Sidebar({ isOpen, close, updateTotalStocks }) {
   const [userData, setUserData] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const userId = localStorage.getItem("LoggedInUser");
-  //     if (!userId) return;
+  useEffect(() => {
+    const fetchData = async () => {
+      const name = localStorage.getItem("loggedInUser"); // Get username
 
-  //     try {
-  //       const response = await fetch("http://localhost:6060/product/userData", {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify({ userId }),
-  //       });
+      if (!name) {
+        console.log("No logged-in user found in localStorage.");
+        return;
+      }
 
-  //       const data = await response.json();
-  //       if (response.ok) {
-  //         setUserData(data);
-  //       } else {
-  //         console.error("Error fetching data:", data.message);
-  //       }
-  //     } catch (error) {
-  //       console.error("Fetch error:", error);
-  //     }
-  //   };
+      try {
+        const url = `http://localhost:6060/product/userData?name=${name}`;
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
 
-  //   fetchData();
-  // }, []);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setUserData(data);
+        updateTotalStocks(data.length); // Send stock count to MainPage
+        console.log("Data fetched successfully:", data);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className={`sidebar-nav ${isOpen ? "show" : "hide"}`}>
@@ -36,7 +42,11 @@ export default function Sidebar({ isOpen, close }) {
         <ul className="note-list">
           <h2>Created Stocks</h2>
           {userData.length > 0 ? (
-            userData.map((item) => <li key={item._id}>{item.data}</li>)
+            userData.map((item) => (
+              <li key={item._id}>
+                <strong>{item.stock}</strong>
+              </li>
+            ))
           ) : (
             <li>No stocks created yet</li>
           )}
