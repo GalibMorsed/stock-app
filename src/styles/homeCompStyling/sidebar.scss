@@ -1,3 +1,10 @@
+* {
+  padding: 0;
+  background: border-box;
+  box-sizing: border-box;
+  margin: 0;
+}
+
 .sidebar-nav {
   width: 330px;
   height: 9.5vh;
@@ -17,7 +24,7 @@
 
   .sidebar-info {
     width: 330px;
-    height: 100%;
+    height: calc(100vh - 80px);
     position: fixed;
     left: 0;
     top: 80px;
@@ -31,7 +38,7 @@
     .note-list {
       list-style: none;
       padding: 20px;
-      display: block; /* Ensure the list is always visible */
+      display: block;
 
       li {
         text-align: left;
@@ -44,12 +51,34 @@
   }
 }
 
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 998;
+  display: none;
+}
+
+.sidebar-nav.show + .sidebar-overlay {
+  display: block;
+}
+
+body.sidebar-open {
+  overflow: hidden;
+}
+
 @media (max-width: 768px) {
   .sidebar-nav {
     display: none;
+    overflow: hidden;
   }
   .sidebar-nav,
   .sidebar-nav .sidebar-info {
+    height: calc(80vh - 60px);
+
     width: 100%;
     top: 30vh;
   }
@@ -65,14 +94,31 @@
     margin-left: 0;
   }
 
+  .sidebar-info {
+    height: calc(70vh - 30px);
+    overflow-y: auto;
+  }
+
   .sidebar-info .note-list {
-    display: block; /* Ensure visibility on smaller screens */
+    display: block;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+
+  .sidebar-nav.show + .sidebar-overlay {
+    display: block;
+  }
+
+  body.sidebar-open {
+    overflow: hidden;
   }
 }
-.sidebar::-webkit-scrollbar {
-  width: 6px;
+.sidebar-info::-webkit-scrollbar {
+  width: 2px;
 }
-.sidebar::-webkit-scrollbar-thumb {
+.sidebar-info::-webkit-scrollbar-thumb {
   background: #a6a6a6;
   border-radius: 10px;
 }

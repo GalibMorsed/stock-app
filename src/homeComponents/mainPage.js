@@ -17,6 +17,14 @@ export default function MainPage() {
     setLoggedInUser(user || "");
   }, []);
 
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.classList.add("sidebar-open");
+    } else {
+      document.body.classList.remove("sidebar-open");
+    }
+  }, [isSidebarOpen]);
+
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarOpen);
   };
@@ -80,6 +88,10 @@ export default function MainPage() {
           close={toggleSidebar}
           updateTotalStocks={setTotalStocks}
         />
+        <div
+          className={`sidebar-overlay ${isSidebarOpen ? "show" : ""}`}
+          onClick={toggleSidebar}
+        ></div>
         <div className="message">Hey, {name} Check Your Stock Report</div>
       </div>
 
