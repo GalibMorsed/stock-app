@@ -61,7 +61,7 @@ export default function MainPage() {
       const result = await response.json();
       if (response.ok) {
         setStocks([...stocks, result.stock]);
-        setTotalStocks(totalStocks + 1); // Update total stocks count
+        setTotalStocks(totalStocks + 1);
         alert("Stock created successfully!");
       } else {
         console.error("Server error:", result);
