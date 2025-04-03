@@ -27,14 +27,20 @@ a {
 }
 p {
   font-weight: bolder;
-  color: var(--background-color);
+  color: var(--text-color);
 }
 
 @import url(authPage.scss);
+//Home Page Components Styling
 @import url(homeCompStyling/mainPage.scss);
 @import url(homeCompStyling/footer.scss);
 @import url(homeCompStyling/navbar.scss);
 @import url(homeCompStyling/sidebar.scss);
+
+//Stock Page Components Styling
+@import url(stockCompStyling/stockScreen.scss);
+@import url(stockCompStyling/stockSidebar.scss);
+@import url(stockCompStyling/stockNav.scss);
 .btn {
   border: none;
   outline: none;

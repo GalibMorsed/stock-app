@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./authPages/loginPage";
 import Signin from "./authPages/signinPage";
 import Home from "./sourcePages/homePage";
+import StockPage from "./sourcePages/stockPage";
 import { useState } from "react";
 import RefrshHandler from "./refrshHandler";
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/home" element={<PrivateRoute element={<Home />} />} />
+        <Route path="/stockPage" element={<StockPage />} />
       </Routes>
     </div>
   );

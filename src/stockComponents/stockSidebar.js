@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Sidebar({ isOpen, close, updateTotalStocks }) {
+export default function StockSidebar() {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,6 @@ export default function Sidebar({ isOpen, close, updateTotalStocks }) {
 
         const data = await response.json();
         setUserData(data);
-        updateTotalStocks(data.length); // Send stock count to MainPage
         console.log("Data fetched successfully:", data);
       } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -37,8 +36,13 @@ export default function Sidebar({ isOpen, close, updateTotalStocks }) {
   }, []);
 
   return (
-    <div className={`sidebar-nav ${isOpen ? "show" : "hide"}`}>
-      <h1 className="web-name">StockNest</h1>
+    <div className="stock-sidebar">
+      <div className="header">
+        <Link to="/">
+          <div className="img"></div>
+        </Link>
+        <h1 className="home"> ← Home</h1>
+      </div>
       <div className="sidebar-info">
         <ul className="note-list">
           <h2>Created Stocks</h2>

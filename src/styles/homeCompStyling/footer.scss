@@ -1,14 +1,14 @@
 .footer {
-  height: 65px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-  background-color: #f8f9fa;
+  height: 60px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.508);
+  background-color: #dcf0e7;
   color: var(--text-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   position: fixed;
-  width: calc(100% - 380px);
+  width: calc(100% - 360px);
   left: 350px;
   bottom: 0;
   z-index: 998;
