@@ -46,7 +46,7 @@ export default function Sidebar({ isOpen, close, updateTotalStocks }) {
             userData.map((item) => (
               <li key={item._id}>
                 <Link
-                  to="/stockPage"
+                  to={`/stockPage/${encodeURIComponent(item.stock)}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <strong>{item.stock}</strong>

@@ -1,12 +1,14 @@
 import React from "react";
 import StockScreen from "../stockComponents/stockScreen";
 import StockSidebar from "../stockComponents/stockSidebar";
+import StockNav from "../stockComponents/stockNav";
 
 export default function stockPage() {
   return (
     <div>
       <StockScreen />
       <StockSidebar />
+      <StockNav />
     </div>
   );
 }

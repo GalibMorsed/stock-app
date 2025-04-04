@@ -1,19 +1,177 @@
-.stock-screen {
-  padding: 80px 20px;
-  background: var(--background-color);
-  color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.stock-page {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  height: 100%;
+  width: 169vh;
+  position: fixed;
+  top: 10%;
+  left: 23%;
   justify-content: center;
-  height: calc(100vh - 80px);
-  overflow-y: auto;
-  width: 100%;
-  box-sizing: border-box;
-  transition: padding 0.3s ease-in-out;
-  z-index: 1;
+  align-items: center;
+  overflow: auto;
 
-  h1 {
-    color: red;
+  .stock-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 80vh;
+    margin-bottom: 20vh;
+    margin-top: 5vh;
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .edit {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .delete {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .stock-table {
+    flex-direction: row;
+    width: 80%;
+    max-width: 800px;
+    margin-left: 28vh;
+    margin-bottom: 20vh;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: white;
+
+    .table-wrapper {
+      overflow-x: auto;
+      width: 100%;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px; // ensures the table doesn't get squished
+        white-space: nowrap;
+
+        th,
+        td {
+          padding: 12px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #f4f4f4;
+          font-weight: bold;
+        }
+
+        tr:hover {
+          background-color: #f1f1f1;
+        }
+      }
+    }
+  }
+}
+
+// Media queries for responsiveness
+@media (max-width: 1400px) {
+  .stock-page {
+    width: 930px;
+    left: 28%;
+    .stock-table {
+      width: 100%;
+      max-width: 90%;
+      margin-left: 30px;
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .stock-page {
+    width: 650px;
+    left: 34.5%;
+    .stock-buttons {
+      gap: 30vh;
+    }
+    .stock-table {
+      width: 100%;
+      max-width: 95%;
+      margin-left: 15px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .stock-page {
+    width: 440px;
+    left: 43.5%;
+    top: 70px;
+    .stock-buttons {
+      gap: 18vh;
+    }
+    .stock-table {
+      width: 100%;
+      max-width: 95%;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .stock-page {
+    overflow-y: scroll;
+    width: 100%;
+    left: 0;
+    top: 80px;
+    position: relative;
+    min-height: calc(110vh - 65px);
+    .stock-table {
+      width: 100%;
+      max-width: 95%;
+      margin-left: 15px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .stock-page {
+    overflow-y: scroll;
+    width: 100%;
+    top: 80px;
+    position: relative;
+    min-height: calc(110vh - 65px);
+    .stock-table {
+      width: 100%;
+      max-width: 95%;
+      margin-left: 15px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .stock-page {
+    overflow-y: scroll;
+    width: 100%;
+    top: 80px;
+    padding: 15px;
+    position: relative;
+    box-shadow: none;
+    min-height: calc(130vh - 65px);
+    .stock-buttons {
+      flex-direction: column;
+      gap: 10vh;
+      margin-bottom: 5vh;
+    }
   }
 }

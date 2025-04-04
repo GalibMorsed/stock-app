@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/home" element={<PrivateRoute element={<Home />} />} />
-        <Route path="/stockPage" element={<StockPage />} />
+        <Route path="/stockPage/:stockName" element={<StockPage />} />
       </Routes>
     </div>
   );

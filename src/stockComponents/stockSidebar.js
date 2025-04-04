@@ -41,7 +41,7 @@ export default function StockSidebar() {
         <Link to="/">
           <div className="img"></div>
         </Link>
-        <h1 className="home"> ← Home</h1>
+        <h1 className="home">Home</h1>
       </div>
       <div className="sidebar-info">
         <ul className="note-list">
@@ -50,7 +50,7 @@ export default function StockSidebar() {
             userData.map((item) => (
               <li key={item._id}>
                 <Link
-                  to="/stockPage"
+                  to={`/stockPage/${encodeURIComponent(item.stock)}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <strong>{item.stock}</strong>
