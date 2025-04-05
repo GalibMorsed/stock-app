@@ -23,6 +23,11 @@ export default function StockScreen() {
     <div className="stock-page">
       <div className="stock-buttons">
         <button className="btn edit">Edit</button>
+        <button className="btn add">Add</button>
+        <button className="btn filter">Filter</button>
+        <button className="btn sort">Sort</button>
+        <button className="btn search">Search</button>
+        <button className="btn archive">Archive</button>
         <button className="btn delete">Delete</button>
       </div>
 
@@ -31,6 +36,7 @@ export default function StockScreen() {
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Price ($)</th>
@@ -40,6 +46,7 @@ export default function StockScreen() {
             <tbody>
               {stocks.map((stock) => (
                 <tr key={stock.id}>
+                  <td>▶️</td>
                   <td>{stock.id}</td>
                   <td>{stock.name}</td>
                   <td>{stock.price}</td>
@@ -49,6 +56,10 @@ export default function StockScreen() {
             </tbody>
           </table>
         </div>
+      </div>
+      <div className="bottom-btns">
+        <button className="btn refresh">Refresh</button>
+        <button className="btn share">Share</button>
       </div>
     </div>
   );

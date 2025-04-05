@@ -37,10 +37,9 @@
   }
 
   .table-btn {
-    margin-left: auto;
     display: flex;
     align-items: center;
-
+    margin-left: auto;
     .btn {
       background: var(--primary-color);
       color: #ffffff;
@@ -51,6 +50,59 @@
       transition: background 0.3s ease;
       &:hover {
         background: #2a91ff;
+      }
+    }
+    .dropdown-section {
+      display: wrap;
+      flex-direction: row;
+      gap: 8px;
+      margin-top: 100vh;
+      background-color: #ffffff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      input {
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .btn.small {
+        padding: 4px 8px;
+        font-size: 14px;
+      }
+    }
+
+    .table-editor {
+      margin-top: 100vh;
+      max-width: 100%;
+      overflow-x: auto;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        td {
+          border: 1px solid #ccc;
+          padding: 4px;
+
+          input {
+            width: 100%;
+            padding: 4px;
+            border: none;
+            outline: none;
+          }
+        }
+      }
+
+      .btn.success {
+        margin-top: 8px;
+        background-color: #28a745;
+        &:hover {
+          background-color: #218838;
+        }
       }
     }
   }
