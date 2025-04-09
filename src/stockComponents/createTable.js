@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const CreateTable = ({ onFinish }) => {
   const [showInputs, setShowInputs] = useState(false);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
   const [tableData, setTableData] = useState([]);
+
+  const name = localStorage.getItem("loggedInUser");
+  const { stockName } = useParams();
 
   const handleCreate = () => {
     setShowInputs(true);
@@ -21,12 +25,47 @@ const CreateTable = ({ onFinish }) => {
     setTableData(updatedData);
   };
 
-  const handleFinish = () => {
-    // Wait 5 seconds then notify parent component
-    alert("Table created successfully!");
-    setTimeout(() => {
-      onFinish();
-    }, 5000);
+  const handleFinish = async () => {
+    if (!name || !stockName) {
+      alert("Missing user or stock name");
+      return;
+    }
+
+    const formattedData = tableData.map((row) => {
+      const rowObj = {};
+      row.forEach((cell, index) => {
+        rowObj[`Col${index + 1}`] = cell;
+      });
+      return rowObj;
+    });
+
+    const newTable = {
+      name,
+      stock: stockName,
+      data: formattedData,
+    };
+
+    try {
+      const url = "http://localhost:6060/table/storeTable";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newTable),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert("Table created successfully!");
+        setTimeout(() => {
+          onFinish();
+        }, 5000);
+      } else {
+        alert("Error saving table: " + result.message);
+      }
+    } catch (error) {
+      console.error("Save failed", error);
+      alert("Failed to save table");
+    }
   };
 
   return (

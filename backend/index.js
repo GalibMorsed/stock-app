@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const AuthRouter = require("./Routes/authRouter");
 const ProductRouter = require("./Routes/productRouter");
+const TableRouter = require("./Routes/tableRouter");
 const dotenv = require("dotenv");
 require("./Models/db");
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/auth", AuthRouter);
 app.use("/product", ProductRouter);
+app.use("/table", TableRouter);
 
 app.listen(PORT, (error) => {
   if (error) {
