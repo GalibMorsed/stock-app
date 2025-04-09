@@ -110,136 +110,135 @@
       }
     }
   }
+}
+// Responsive Design
 
-  // Responsive Design (mirroring your stock-page logic)
+@media (max-width: 1400px) {
+  .creating-table {
+    width: 930px;
+    left: 28%;
+  }
+  .table-inputs {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
 
-  @media (max-width: 1400px) {
-    .creating-table {
-      width: 930px;
-      left: 28%;
-    }
-    .table-inputs {
-      max-width: 90%;
-      margin: 0 auto;
+@media (max-width: 1200px) {
+  .creating-table {
+    width: 650px;
+    left: 34.5%;
+  }
+  .table-inputs {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .creating-table {
+    width: 440px;
+    left: 43.5%;
+    top: 70px;
+  }
+
+  .table-inputs {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .creating-table {
+    width: 100%;
+    left: 0;
+    padding-top: 80px;
+    position: relative;
+    min-height: calc(110vh - 65px);
+    overflow-y: scroll;
+  }
+
+  .input-section {
+    padding: 1rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+    align-items: flex-start;
+
+    input {
+      width: 100%;
+      margin-top: 5px;
     }
   }
 
-  @media (max-width: 1200px) {
-    .creating-table {
-      width: 650px;
-      left: 34.5%;
-    }
-    .table-inputs {
-      max-width: 95%;
-      margin: 0 auto;
-    }
+  .table-inputs {
+    max-width: 95%;
+    margin: 0 auto;
   }
 
-  @media (max-width: 992px) {
-    .creating-table {
-      width: 440px;
-      left: 43.5%;
-      top: 70px;
-    }
+  .create-btn,
+  .enter-btn,
+  .final-create-btn {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
 
-    .table-inputs {
-      max-width: 95%;
-      margin: 0 auto;
-    }
+@media (max-width: 576px) {
+  .creating-table {
+    overflow-y: scroll;
+    width: 100%;
+    position: relative;
+    top: 80px;
+    padding: 1rem;
+    min-height: calc(130vh - 65px);
+  }
+  .table-inputs {
+    max-width: 95%;
+    margin: 0 auto;
   }
 
-  @media (max-width: 768px) {
-    .creating-table {
-      width: 100%;
-      left: 0;
-      padding-top: 80px;
-      position: relative;
-      min-height: calc(110vh - 65px);
-      overflow-y: scroll;
-    }
+  .create-btn,
+  .enter-btn,
+  .final-create-btn {
+    font-size: 0.95rem;
+  }
+}
 
-    .input-section {
-      padding: 1rem;
-    }
-
-    .input-group {
-      flex-direction: column;
-      align-items: flex-start;
-
-      input {
-        width: 100%;
-        margin-top: 5px;
-      }
-    }
-
-    .table-inputs {
-      max-width: 95%;
-      margin: 0 auto;
-    }
-
-    .create-btn,
-    .enter-btn,
-    .final-create-btn {
-      width: 100%;
-      font-size: 1rem;
-    }
+@media (max-width: 480px) {
+  .creating-table {
+    overflow-y: scroll;
+    width: 100%;
+    top: 80px;
+    padding: 15px;
+    position: relative;
+    min-height: calc(130vh - 65px);
+    box-shadow: none;
   }
 
-  @media (max-width: 576px) {
-    .creating-table {
-      overflow-y: scroll;
-      width: 100%;
-      position: relative;
-      top: 80px;
-      padding: 1rem;
-      min-height: calc(130vh - 65px);
-    }
-    .table-inputs {
-      max-width: 95%;
-      margin: 0 auto;
-    }
-
-    .create-btn,
-    .enter-btn,
-    .final-create-btn {
-      font-size: 0.95rem;
-    }
+  .table-inputs {
+    max-width: 100%;
+    margin: 0 auto;
   }
 
-  @media (max-width: 480px) {
-    .creating-table {
-      overflow-y: scroll;
-      width: 100%;
-      top: 80px;
-      padding: 15px;
-      position: relative;
-      min-height: calc(130vh - 65px);
-      box-shadow: none;
-    }
+  .create-btn,
+  .enter-btn,
+  .final-create-btn {
+    width: 100%;
+    margin-bottom: 15px;
+  }
 
-    .table-inputs {
-      max-width: 100%;
-      margin: 0 auto;
-    }
+  .input-group {
+    gap: 5px;
+  }
 
-    .create-btn,
-    .enter-btn,
-    .final-create-btn {
-      width: 100%;
-      margin-bottom: 15px;
-    }
+  table {
+    font-size: 0.85rem;
 
-    .input-group {
-      gap: 5px;
-    }
-
-    table {
-      font-size: 0.85rem;
-
-      th,
-      td {
-        padding: 8px 4px;
-      }
+    th,
+    td {
+      padding: 8px 4px;
     }
   }
 }
