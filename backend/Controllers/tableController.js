@@ -26,17 +26,20 @@ const saveTableData = async (req, res) => {
   }
 };
 const getTableData = async (req, res) => {
-  const { name, stockName } = req.params;
+  const { name, stockName } = req.query;
 
   try {
-    const table = await TableData.findOne({ name, stockName });
-    if (!table) return res.status(404).json({ message: "Table not found" });
+    const table = await TableData.findOne({ name, stock: stockName });
+    if (!table) {
+      return res.status(404).json({ message: "Table not found" });
+    }
 
-    res.json(table);
+    res.json(table.data);
   } catch (error) {
     res.status(500).json({ message: "Failed to retrieve data", error });
   }
 };
+
 module.exports = {
   saveTableData,
   getTableData,

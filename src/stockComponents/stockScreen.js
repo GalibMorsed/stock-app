@@ -1,23 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function StockScreen() {
-  const stocks = [
-    { id: 1, name: "Apple", price: 175, quantity: 50 },
-    { id: 2, name: "Microsoft", price: 320, quantity: 30 },
-    { id: 3, name: "Tesla", price: 680, quantity: 20 },
-    { id: 4, name: "Apple", price: 175, quantity: 50 },
-    { id: 5, name: "Microsoft", price: 320, quantity: 30 },
-    { id: 6, name: "Tesla", price: 680, quantity: 20 },
-    { id: 7, name: "Apple", price: 175, quantity: 50 },
-    { id: 8, name: "Microsoft", price: 320, quantity: 30 },
-    { id: 9, name: "Tesla", price: 680, quantity: 20 },
-    { id: 10, name: "Apple", price: 175, quantity: 50 },
-    { id: 11, name: "Microsoft", price: 320, quantity: 30 },
-    { id: 12, name: "Tesla", price: 680, quantity: 20 },
-    { id: 13, name: "Apple", price: 175, quantity: 50 },
-    { id: 14, name: "Microsoft", price: 320, quantity: 30 },
-    { id: 15, name: "Tesla", price: 680, quantity: 20 },
-  ];
+  const [tableData, setTableData] = useState([]);
+  const [columns, setColumns] = useState([]);
+  const [noTable, setNoTable] = useState(false);
+
+  const { stockName } = useParams();
+  const name = localStorage.getItem("loggedInUser");
+
+  useEffect(() => {
+    const fetchTable = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:6060/table/fetchTable?name=${name}&stockName=${stockName}`
+        );
+        const data = await res.json();
+
+        if (!data || data.length === 0) {
+          setNoTable(true);
+          return;
+        }
+
+        setTableData(data);
+        setColumns(Object.keys(data[0]));
+      } catch (err) {
+        console.error("Error fetching table:", err);
+        setNoTable(true);
+      }
+    };
+
+    fetchTable();
+  }, [name, stockName]);
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this table?"
+    );
+    if (!confirmDelete) return;
+
+    const userName = localStorage.getItem("loggedInUser");
+
+    try {
+      const res = await fetch(
+        `http://localhost:6060/table/deleteTable?name=${userName}&stockName=${stockName}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert(result.message);
+        window.location.href = "/";
+      } else {
+        alert(result.message || "Failed to delete.");
+      }
+    } catch (error) {
+      console.error("Delete failed:", error);
+      alert("Something went wrong during deletion.");
+    }
+  };
 
   return (
     <div className="stock-page">
@@ -28,35 +72,40 @@ export default function StockScreen() {
         <button className="btn sort">Sort</button>
         <button className="btn search">Search</button>
         <button className="btn archive">Archive</button>
-        <button className="btn delete">Delete</button>
+        <button className="btn delete" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
 
       <div className="stock-table">
         <div className="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Price ($)</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stocks.map((stock) => (
-                <tr key={stock.id}>
-                  <td>▶️</td>
-                  <td>{stock.id}</td>
-                  <td>{stock.name}</td>
-                  <td>{stock.price}</td>
-                  <td>{stock.quantity}</td>
+          {noTable ? (
+            <p className="no-table-msg">No table created yet for this stock.</p>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  {columns.map((col, index) => (
+                    <th key={index}>{col}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {tableData.map((row, index) => (
+                  <tr key={index}>
+                    <td>▶️</td>
+                    {columns.map((col, cIndex) => (
+                      <td key={cIndex}>{row[col]}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
+
       <div className="bottom-btns">
         <button className="btn refresh">Refresh</button>
         <button className="btn share">Share</button>

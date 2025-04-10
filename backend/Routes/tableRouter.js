@@ -5,8 +5,9 @@ const {
   getTableData,
 } = require("../Controllers/tableController");
 const { tableValidation } = require("../Middlewares/tableValidation");
+const { deleteTableData } = require("../Controllers/deleteController");
 
 router.post("/storeTable", tableValidation, saveTableData);
-router.get("/fetchTable", getTableData); // optional: add validation for params
-
+router.get("/fetchTable", getTableData);
+router.delete("/deleteTable", deleteTableData);
 module.exports = router;
