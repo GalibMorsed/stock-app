@@ -4,10 +4,30 @@ import { useParams } from "react-router-dom";
 export default function StockScreen() {
   const [tableData, setTableData] = useState([]);
   const [columns, setColumns] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [editedData, setEditedData] = useState([]);
   const [noTable, setNoTable] = useState(false);
 
   const { stockName } = useParams();
   const name = localStorage.getItem("loggedInUser");
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Stock Table",
+          text: `Check out this stock table: ${stockName}`,
+          url: `${window.location.origin}/table/${stockName}`,
+        })
+        .catch((err) => console.error("Error sharing:", err));
+    } else {
+      alert("Sharing is not supported on this browser.");
+    }
+  };
 
   useEffect(() => {
     const fetchTable = async () => {
@@ -23,6 +43,7 @@ export default function StockScreen() {
         }
 
         setTableData(data);
+        setEditedData(data);
         setColumns(Object.keys(data[0]));
       } catch (err) {
         console.error("Error fetching table:", err);
@@ -33,22 +54,56 @@ export default function StockScreen() {
     fetchTable();
   }, [name, stockName]);
 
+  const handleEditToggle = () => {
+    setEditMode((prev) => !prev);
+  };
+
+  const handleChange = (rowIdx, col, value) => {
+    const updated = [...editedData];
+    updated[rowIdx][col] = value;
+    setEditedData(updated);
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:6060/table/editTable?name=${name}&stockName=${stockName}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            stockName,
+            data: editedData,
+          }),
+        }
+      );
+
+      const result = await res.json();
+      if (res.ok) {
+        alert("Table updated successfully");
+        setTableData(editedData);
+        setEditMode(false);
+      } else {
+        alert(result.message || "Update failed");
+      }
+    } catch (err) {
+      console.error("Error saving table:", err);
+      alert("Something went wrong");
+    }
+  };
+
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this table?"
     );
     if (!confirmDelete) return;
 
-    const userName = localStorage.getItem("loggedInUser");
-
     try {
       const res = await fetch(
-        `http://localhost:6060/table/deleteTable?name=${userName}&stockName=${stockName}`,
-        {
-          method: "DELETE",
-        }
+        `http://localhost:6060/table/deleteTable?name=${name}&stockName=${stockName}`,
+        { method: "DELETE" }
       );
-
       const result = await res.json();
 
       if (res.ok) {
@@ -63,12 +118,43 @@ export default function StockScreen() {
     }
   };
 
+  const handleDeleteRow = async (rowIdx) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this row?"
+    );
+    if (!confirmDelete) return;
+
+    const updatedData = editedData.filter((_, index) => index !== rowIdx);
+    try {
+      const res = await fetch(
+        `http://localhost:6060/table/deleteRow?name=${name}&stockName=${stockName}`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ row: editedData[rowIdx] }),
+        }
+      );
+
+      if (res.ok) {
+        alert("Row deleted successfully");
+        setEditedData(updatedData);
+      } else {
+        const result = await res.json();
+        alert(result.message || "Failed to delete row.");
+      }
+    } catch (err) {
+      console.error("Error deleting row:", err);
+      alert("Something went wrong while deleting the row.");
+    }
+  };
+
   return (
     <div className="stock-page">
       <div className="stock-buttons">
-        <button className="btn edit">Edit</button>
+        <button className="btn edit" onClick={handleEditToggle}>
+          {editMode ? "Cancel" : "Edit"}
+        </button>
         <button className="btn add">Add</button>
-        <button className="btn filter">Filter</button>
         <button className="btn sort">Sort</button>
         <button className="btn search">Search</button>
         <button className="btn archive">Archive</button>
@@ -92,11 +178,29 @@ export default function StockScreen() {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((row, index) => (
-                  <tr key={index}>
-                    <td>▶️</td>
-                    {columns.map((col, cIndex) => (
-                      <td key={cIndex}>{row[col]}</td>
+                {(editMode ? editedData : tableData).map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    <td>
+                      {!editMode && "▶️"}
+                      {editMode && (
+                        <button onClick={() => handleDeleteRow(rowIndex)}>
+                          ❌
+                        </button>
+                      )}
+                    </td>
+                    {columns.map((col, colIndex) => (
+                      <td key={colIndex}>
+                        {editMode ? (
+                          <input
+                            value={editedData[rowIndex][col]}
+                            onChange={(e) =>
+                              handleChange(rowIndex, col, e.target.value)
+                            }
+                          />
+                        ) : (
+                          row[col]
+                        )}
+                      </td>
                     ))}
                   </tr>
                 ))}
@@ -104,11 +208,20 @@ export default function StockScreen() {
             </table>
           )}
         </div>
+        {editMode && (
+          <button className="btn update" onClick={handleUpdate}>
+            Save Changes
+          </button>
+        )}
       </div>
 
       <div className="bottom-btns">
-        <button className="btn refresh">Refresh</button>
-        <button className="btn share">Share</button>
+        <button className="btn refresh" onClick={handleRefresh}>
+          Refresh
+        </button>
+        <button className="btn share" onClick={handleShare}>
+          Share
+        </button>
       </div>
     </div>
   );

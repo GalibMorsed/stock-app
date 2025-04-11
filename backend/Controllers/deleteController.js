@@ -30,6 +30,29 @@ const deleteTableData = async (req, res) => {
   }
 };
 
+const deleteRow = async (req, res) => {
+  const { name, stockName } = req.query;
+  const { row } = req.body;
+
+  try {
+    const table = await TableModel.findOne({ name, stock: stockName });
+
+    if (!table) {
+      return res.status(404).json({ message: "Table not found" });
+    }
+
+    table.data = table.data.filter(
+      (tableRow) => JSON.stringify(tableRow) !== JSON.stringify(row)
+    );
+    await table.save();
+
+    res.json({ message: "Row deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting row", error });
+  }
+};
+
 module.exports = {
   deleteTableData,
+  deleteRow,
 };

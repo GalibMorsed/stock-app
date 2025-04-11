@@ -16,7 +16,7 @@ console.log(`MONGO_CONN: ${process.env.MONGO_CONN}`);
 console.log(`JWT_SECRET: ${process.env.JWT_SECRET}`);
 
 app.get("/ping", (req, res) => {
-  res.send("PONG adlhalg ldajhdall algdjk");
+  res.send("PONGA adlhalg ldajhdall algdjk");
 });
 
 app.use(bodyParser.json());
