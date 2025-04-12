@@ -148,13 +148,49 @@ export default function StockScreen() {
     }
   };
 
+  const handleAddRow = () => {
+    const newRow = {};
+    columns.forEach((col) => {
+      newRow[col] = "";
+    });
+    setEditedData([...editedData, newRow]);
+  };
+
+  const handleAddColumn = () => {
+    const newColName = prompt("Enter new column name:");
+    if (!newColName) return;
+
+    if (columns.includes(newColName)) {
+      alert("Column already exists.");
+      return;
+    }
+
+    const updatedColumns = [...columns, newColName];
+    const updatedData = editedData.map((row) => ({
+      ...row,
+      [newColName]: "",
+    }));
+
+    setColumns(updatedColumns);
+    setEditedData(updatedData);
+  };
+
   return (
     <div className="stock-page">
       <div className="stock-buttons">
         <button className="btn edit" onClick={handleEditToggle}>
           {editMode ? "Cancel" : "Edit"}
         </button>
-        <button className="btn add">Add</button>
+        {editMode && (
+          <>
+            <button className="btn add" onClick={handleAddRow}>
+              Add Row
+            </button>
+            <button className="btn add" onClick={handleAddColumn}>
+              Add Column
+            </button>
+          </>
+        )}
         <button className="btn sort">Sort</button>
         <button className="btn search">Search</button>
         <button className="btn archive">Archive</button>
@@ -172,13 +208,16 @@ export default function StockScreen() {
               <thead>
                 <tr>
                   <th></th>
-                  {columns.map((col, index) => (
-                    <th key={index}>{col}</th>
+                  {columns.map((col, colIndex) => (
+                    <th key={colIndex}>{tableData[0][col]}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {(editMode ? editedData : tableData).map((row, rowIndex) => (
+                {(editMode
+                  ? editedData
+                  : tableData.slice(editMode ? 0 : 1)
+                ).map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     <td>
                       {!editMode && "▶️"}

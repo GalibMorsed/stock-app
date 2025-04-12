@@ -42,6 +42,11 @@ p {
 @import url(stockCompStyling/stockSidebar.scss);
 @import url(stockCompStyling/stockNav.scss);
 @import url(stockCompStyling/createTable.scss);
+
+//Stock Analysis Components Styling
+@import url(stAnalysiscompStyling/analysisNav.scss);
+@import url(stAnalysiscompStyling/analysisScreen.scss);
+
 .btn {
   border: none;
   outline: none;

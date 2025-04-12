@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const [isSidebarOpen, setIsSidebarVisible] = useState(false);
@@ -11,6 +12,7 @@ export default function MainPage() {
   const [stockName, setStockName] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [name, setLoggedInUser] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = localStorage.getItem("loggedInUser");
@@ -100,7 +102,12 @@ export default function MainPage() {
           <button className="btn" onClick={toggleStockForm}>
             Create Stock
           </button>
-          <button className="btn">Stock Analysis</button>
+          <button
+            className="btn"
+            onClick={() => navigate("/stockAnalysisPage")}
+          >
+            Stock Analysis
+          </button>
         </div>
         <div className="border"></div>
         <div className="sales-btns">
