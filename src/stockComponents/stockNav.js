@@ -45,7 +45,7 @@ export default function StockNav({ onCreateTable }) {
     <div className="stock-nav">
       <div className="stock-info">
         <Link to="/home">
-          <div className="home-img"></div>
+          <div className="home-img" title="Home"></div>
         </Link>
         <p className="date">
           {createdDate ? `CreatedAt: ${createdDate}` : "Loading..."}

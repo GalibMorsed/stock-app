@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 export default function StockSidebar() {
   const [userData, setUserData] = useState([]);
+  const [activeStock, setActiveStock] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const name = localStorage.getItem("loggedInUser"); // Get username
+      const name = localStorage.getItem("loggedInUser");
 
       if (!name) {
         console.log("No logged-in user found in localStorage.");
@@ -48,7 +49,11 @@ export default function StockSidebar() {
           <h2>Created Stocks</h2>
           {userData.length > 0 ? (
             userData.map((item) => (
-              <li key={item._id}>
+              <li
+                key={item._id}
+                className={activeStock === item._id ? "active" : ""}
+                onClick={() => setActiveStock(item._id)} // Set active stock
+              >
                 <Link
                   to={`/stockPage/${encodeURIComponent(item.stock)}`}
                   style={{ textDecoration: "none", color: "inherit" }}

@@ -65,6 +65,7 @@ export default function MainPage() {
         setStocks([...stocks, result.stock]);
         setTotalStocks(totalStocks + 1);
         alert("Stock created successfully!");
+        window.location.reload();
       } else {
         console.error("Server error:", result);
         alert(result.error || "Failed to create stock");

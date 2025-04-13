@@ -58,7 +58,7 @@ const CreateTable = ({ onFinish }) => {
         alert("Table created successfully!");
         setTimeout(() => {
           onFinish();
-        }, 5000);
+        }, 2000);
       } else {
         alert("Error saving table: " + result.message);
       }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function AnalysisScreen() {
   const [startDate, setStartDate] = useState("");
@@ -75,14 +76,26 @@ export default function AnalysisScreen() {
                 <th>Stock Name</th>
                 <th>Created Date</th>
                 <th>Has Table</th>
+                <th>Row Count</th>
+                <th>Column Count</th>
               </tr>
             </thead>
             <tbody>
               {analysisData.map((stock, i) => (
                 <tr key={i}>
-                  <td>{stock.stockName || "N/A"}</td>
-                  <td>{stock.createdDate || "N/A"}</td>
+                  <td>
+                    {stock.hasTable ? (
+                      <Link to={`/stockPage/${stock.stockName}`}>
+                        {stock.stockName}
+                      </Link>
+                    ) : (
+                      stock.stockName
+                    )}
+                  </td>
+                  <td>{new Date(stock.createdDate).toLocaleDateString()}</td>
                   <td>{stock.hasTable ? "Yes" : "No"}</td>
+                  <td>{stock.hasTable ? stock.rowCount : "-"}</td>
+                  <td>{stock.hasTable ? stock.colCount : "-"}</td>
                 </tr>
               ))}
             </tbody>

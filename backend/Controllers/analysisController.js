@@ -22,11 +22,21 @@ const getStockAnalysis = async (req, res) => {
 
     const stockDetails = await Promise.all(
       filteredStocks.map(async (stock) => {
-        const tableExists = await TableData.exists({ stock: stock.stock }); // Check if a table exists for the stock
+        const table = await TableData.findOne({ name, stock: stock.stock });
+
+        const hasTable = !!table;
+        const rowCount = hasTable ? table.data.length : 0;
+        const colCount =
+          hasTable && table.data.length > 0
+            ? Object.keys(table.data[0]).length
+            : 0;
+
         return {
           stockName: stock.stock,
           createdDate: stock.date,
-          hasTable: !!tableExists, // Include whether the table exists
+          hasTable,
+          rowCount,
+          colCount,
         };
       })
     );

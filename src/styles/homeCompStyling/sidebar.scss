@@ -47,6 +47,11 @@
         border-bottom: 1px solid #ccc;
         color: #333;
         cursor: pointer;
+
+        &.active {
+          background: rgba(0, 0, 0, 0.2); // Highlight color for the active item
+          font-weight: bold; // Optional: Make the text bold
+        }
       }
     }
   }

@@ -12,11 +12,11 @@ export default function AnalysisNav() {
   return (
     <div className="analysis-nav">
       <div className="left-section" onClick={() => navigate("/")}>
-        <div className="home-img"></div>
+        <div className="home-img" title="Home"></div>
         <p className="home-text">Home</p>
       </div>
       <div className="right-section">
-        <div className="user-img"></div>
+        <div className="user-img" title="Profile"></div>
         <p className="user-text">Hi, {loggedInUser}</p>
       </div>
     </div>

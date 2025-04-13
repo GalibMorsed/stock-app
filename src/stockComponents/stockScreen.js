@@ -193,7 +193,12 @@ export default function StockScreen() {
         )}
         <button className="btn sort">Sort</button>
         <button className="btn search">Search</button>
-        <button className="btn archive">Archive</button>
+        <button
+          className="btn archive"
+          onClick={() => alert("This table is Archived successfully.")}
+        >
+          Archive
+        </button>
         <button className="btn delete" onClick={handleDelete}>
           Delete
         </button>
