@@ -4,6 +4,7 @@ import Signin from "./authPages/signinPage";
 import Home from "./sourcePages/homePage";
 import StockPage from "./sourcePages/stockPage";
 import StockAnalysisPage from "./sourcePages/stockAnalysisPage";
+import ProfilePage from "./sourcePages/profilePage";
 import { useState } from "react";
 import RefrshHandler from "./refrshHandler";
 
@@ -23,7 +24,8 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/home" element={<PrivateRoute element={<Home />} />} />
         <Route path="/stockPage/:stockName" element={<StockPage />} />
-        <Route path="/stockAnalysisPage/" element={<StockAnalysisPage />} />
+        <Route path="/stockAnalysisPage" element={<StockAnalysisPage />} />
+        <Route path="/ProfilePage" element={<ProfilePage />} />
       </Routes>
     </div>
   );

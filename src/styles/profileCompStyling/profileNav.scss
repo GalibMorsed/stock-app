@@ -1,41 +1,35 @@
-.navbar {
+.profile-nav {
   height: 70px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   background-color: #f8f9fa;
-  color: var(--text-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   position: fixed;
-  width: calc(100% - 360px);
-  left: 350px;
+  width: 100%;
   top: 0;
   z-index: 998;
   transition: all 0.3s ease-in-out;
 
-  .user-info {
+  .left-sec {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #333;
+    cursor: pointer;
+    padding-left: 5vh;
 
-    .img {
+    .home-img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: url("../../../public/userImg.avif") center/cover no-repeat;
+      background: url("../../../public/home-img2.webp") center/cover no-repeat;
       border: 2px solid #ddd;
-      cursor: pointer;
-    }
-
-    .name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-color);
     }
   }
 
-  .logout-btn {
+  .delete-btn {
     margin-left: auto;
     display: flex;
     align-items: center;
@@ -54,22 +48,18 @@
       }
     }
   }
-}
 
-@media (max-width: 768px) {
-  .navbar {
+  @media (max-width: 768px) {
     width: 100%;
     left: 0;
     justify-content: center;
     padding: 0 10px;
-  }
 
-  .user-info {
-    display: none;
-  }
+    .left-sec {
+      padding-left: 0;
+    }
 
-  .navbar {
-    .logout-btn {
+    .delete-btn {
       .btn {
         padding: 2px 4px;
         text-transform: none;

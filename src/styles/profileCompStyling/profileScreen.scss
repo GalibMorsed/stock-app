@@ -1,0 +1,175 @@
+.profile-screen {
+  margin-top: 80px;
+  padding: 20px;
+  display: flex;
+  gap: 30px;
+
+  .left-side,
+  .right-side {
+    flex: 1;
+
+    h2 {
+      padding-left: 6vh;
+      padding-bottom: 10px;
+    }
+  }
+
+  .edit-info,
+  .archive,
+  .stock-status {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .avatar-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: url("../../../public/userImg.avif") center/cover no-repeat;
+      border: 3px solid #ccc;
+    }
+
+    .edit-avatar-btn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: #0099ff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 5px;
+      transition: 0.3s;
+
+      &:hover {
+        background: #0056b3;
+      }
+    }
+  }
+
+  .edit-btn {
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  .explore-btn {
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+
+    .day-header {
+      font-weight: bold;
+      text-align: center;
+      color: #333;
+    }
+
+    .day {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 12px;
+      background: #f0f0f0;
+      transition: 0.3s;
+
+      &.active {
+        background: #28a745;
+        color: white;
+      }
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-screen {
+    flex-direction: column;
+    gap: 20px;
+
+    .left-side,
+    .right-side {
+      flex: none;
+      width: 100%;
+    }
+
+    .avatar-wrapper {
+      width: 100px;
+      height: 100px;
+    }
+
+    .edit-btn,
+    .explore-btn {
+      padding: 10px 15px;
+    }
+
+    .calendar .day {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+    }
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      p {
+        display: block;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-screen {
+    padding: 15px;
+
+    .avatar-wrapper {
+      width: 80px;
+      height: 80px;
+    }
+
+    .edit-btn,
+    .explore-btn {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    .calendar .day {
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+    }
+  }
+}

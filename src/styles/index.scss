@@ -47,6 +47,10 @@ p {
 @import url(stAnalysiscompStyling/analysisNav.scss);
 @import url(stAnalysiscompStyling/analysisScreen.scss);
 
+//User Profile Components Styling
+@import url(profileCompStyling/profileNav.scss);
+@import url(profileCompStyling/profileScreen.scss);
+
 .btn {
   border: none;
   outline: none;

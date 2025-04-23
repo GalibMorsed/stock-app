@@ -21,7 +21,11 @@ export default function Navbar() {
     <>
       <div className="navbar">
         <div className="user-info">
-          <div className="img" title="Profile"></div>
+          <div
+            className="img"
+            title="Profile"
+            onClick={() => navigate("/ProfilePage")}
+          ></div>
           <p className="name">Welcome, {loggedInUser}</p>
         </div>
         <div className="logout-btn">
