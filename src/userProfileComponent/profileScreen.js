@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Calendar from "./calender";
 
 export default function ProfileScreen() {
   const [userEmail, setUserEmail] = useState("");
@@ -44,21 +45,7 @@ export default function ProfileScreen() {
       <div className="right-side">
         <h2>Created Stock's Status</h2>
         <div className="stock-status">
-          <div className="calendar">
-            {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((day) => (
-              <div key={day} className="day-header">
-                {day}
-              </div>
-            ))}
-            {Array.from({ length: 30 }, (_, i) => (
-              <div
-                key={i}
-                className={`day ${[2, 3, 5].includes(i + 1) ? "active" : ""}`}
-              >
-                {i + 1}
-              </div>
-            ))}
-          </div>
+          <Calendar />
         </div>
       </div>
     </div>
