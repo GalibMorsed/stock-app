@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../Models/User");
+const TableModel = require("../Models/Table");
+const productModel = require("../Models/product");
 
 const signin = async (req, res) => {
   try {
@@ -31,7 +33,7 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
-    const errorMsg = "Authentication failed: email or password is incorrect"; // Improved message
+    const errorMsg = "Authentication failed: email or password is incorrect";
     if (!user) {
       return res.status(403).json({ message: errorMsg, success: false });
     }
@@ -60,4 +62,33 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signin, login };
+const deleteAccount = async (req, res) => {
+  try {
+    const { name } = req.body;
+
+    const userDeletion = await UserModel.deleteOne({ name: name });
+
+    const productDeletion = await productModel.deleteMany({ name: name });
+
+    const tableDeletion = await TableModel.deleteMany({ name: name });
+
+    if (userDeletion.deletedCount === 0) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+
+    res.status(200).json({
+      message: "User and associated data deleted successfully",
+      success: true,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
+  }
+};
+
+module.exports = { signin, login, deleteAccount };
