@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Archives() {
   const [archivedStocks, setArchivedStocks] = useState([]);
   const name = localStorage.getItem("loggedInUser");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArchived = async () => {
@@ -49,6 +51,10 @@ export default function Archives() {
     }
   };
 
+  const handleStockClick = (stockName) => {
+    navigate(`/stockPage/${stockName}`);
+  };
+
   return (
     <div className="archive-page">
       <h2>Archived Stocks</h2>
@@ -61,8 +67,11 @@ export default function Archives() {
               <p>
                 <strong>User:</strong> {stock.name}
               </p>
-              <h3>
-                {" "}
+              <h3
+                className="stock-name"
+                onClick={() => handleStockClick(stock.stock)}
+                style={{ cursor: "pointer", color: "blue" }}
+              >
                 <strong>Stock Name:</strong> {stock.stock}
               </h3>
 

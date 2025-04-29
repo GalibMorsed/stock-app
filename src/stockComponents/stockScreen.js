@@ -37,6 +37,11 @@ export default function StockScreen() {
         );
         const data = await res.json();
 
+        if (res.status === 404) {
+          setNoTable(true);
+          return;
+        }
+
         if (!data || data.length === 0) {
           setNoTable(true);
           return;
@@ -95,7 +100,7 @@ export default function StockScreen() {
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this table?"
+      "Are you sure you want to delete this table? This action cannot be undone and all data associated with this table will be permanently lost."
     );
     if (!confirmDelete) return;
 

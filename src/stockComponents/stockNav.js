@@ -4,11 +4,15 @@ import { useParams, Link } from "react-router-dom";
 export default function StockNav({ onCreateTable }) {
   const { stockName } = useParams();
   const [createdDate, setCreatedDate] = useState("");
+  const [hasTable, setHasTable] = useState(false);
 
   useEffect(() => {
-    const fetchStockDate = async () => {
+    const fetchStockData = async () => {
       const name = localStorage.getItem("loggedInUser");
-      if (!name || !stockName) return;
+      if (!name || !stockName) {
+        console.warn("Missing loggedInUser or stockName");
+        return;
+      }
 
       try {
         const response = await fetch(
@@ -20,25 +24,27 @@ export default function StockNav({ onCreateTable }) {
         const data = await response.json();
         const matchedStock = data.find((item) => item.stock === stockName);
 
-        if (matchedStock?.date) {
-          const formattedDate = new Date(
-            matchedStock.date
-          ).toLocaleDateString();
-          setCreatedDate(formattedDate);
-        } else if (matchedStock?.createdAt) {
-          const formattedDate = new Date(
-            matchedStock.createdAt
-          ).toLocaleDateString();
-          setCreatedDate(formattedDate);
+        if (matchedStock) {
+          if (matchedStock.date || matchedStock.createdAt) {
+            const date = matchedStock.date || matchedStock.createdAt;
+            setCreatedDate(new Date(date).toLocaleDateString());
+          } else {
+            setCreatedDate("Invalid Date");
+          }
+
+          setHasTable(matchedStock.hasTable); // Use hasTable from backend response
         } else {
-          setCreatedDate("Invalid Date");
+          setCreatedDate("Stock not found");
+          setHasTable(false);
         }
       } catch (error) {
+        console.error("Fetch error:", error);
         setCreatedDate("Error loading date");
+        setHasTable(false); // fallback safe value
       }
     };
 
-    fetchStockDate();
+    fetchStockData();
   }, [stockName]);
 
   return (
@@ -52,9 +58,11 @@ export default function StockNav({ onCreateTable }) {
         </p>
       </div>
       <div className="table-btn">
-        <button className="btn" onClick={onCreateTable}>
-          Create Table
-        </button>
+        {!hasTable && (
+          <button className="btn" onClick={onCreateTable}>
+            Create Table
+          </button>
+        )}
       </div>
     </div>
   );

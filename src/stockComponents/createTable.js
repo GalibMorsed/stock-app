@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-
 const CreateTable = ({ onFinish }) => {
   const [showInputs, setShowInputs] = useState(false);
   const [rows, setRows] = useState(0);
@@ -69,20 +68,21 @@ const CreateTable = ({ onFinish }) => {
   };
 
   return (
-    <div className="creating-table">
+    <div className="creating-table ">
       <button className="create-btn" onClick={handleCreate}>
         Start Creating
       </button>
 
       {showInputs && (
         <div className="input-section">
-          <h2>Create your table</h2>
+          <h2>Create Your Table</h2>
           <div className="input-group">
             <label>No. of Columns:</label>
             <input
               type="number"
               min="1"
               onChange={(e) => setCols(+e.target.value)}
+              placeholder="Enter no. of columns"
             />
           </div>
           <div className="input-group">
@@ -91,10 +91,11 @@ const CreateTable = ({ onFinish }) => {
               type="number"
               min="1"
               onChange={(e) => setRows(+e.target.value)}
+              placeholder="Enter no. of rows"
             />
           </div>
           <button className="enter-btn" onClick={handleGenerateFields}>
-            Enter Data
+            Generate Table
           </button>
         </div>
       )}

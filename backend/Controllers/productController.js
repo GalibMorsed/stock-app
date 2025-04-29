@@ -1,4 +1,5 @@
 const CreatedStocks = require("../Models/product");
+const Table = require("../Models/Table"); // Import the Table model
 
 const storeData = async (req, res) => {
   try {
@@ -38,7 +39,15 @@ const userData = async (req, res) => {
       return res.status(404).json({ message: "No data found for this user" });
     }
 
-    res.status(200).json(stocks);
+    // Check if each stock has a table
+    const stocksWithTableInfo = await Promise.all(
+      stocks.map(async (stock) => {
+        const tableExists = await Table.exists({ stock: stock.stock });
+        return { ...stock.toObject(), hasTable: !!tableExists };
+      })
+    );
+
+    res.status(200).json(stocksWithTableInfo);
   } catch (error) {
     console.error("Error in userData:", error);
     res.status(500).json({

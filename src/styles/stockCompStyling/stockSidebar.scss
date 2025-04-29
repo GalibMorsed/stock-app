@@ -19,10 +19,14 @@
   flex-direction: column;
 
   .header {
-    display: flex;
-    align-items: center;
     padding: 20px;
-    gap: 15px;
+    gap: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ccc;
 
     .img {
       width: 50px;
@@ -35,7 +39,7 @@
     .home {
       font-size: 24px;
       color: var(--text-color);
-      padding-left: 20px;
+      padding-left: 10px;
     }
   }
 
