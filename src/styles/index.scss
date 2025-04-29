@@ -30,7 +30,9 @@ p {
   color: var(--text-color);
 }
 
+// Login & Signin Page Components Styling
 @import url(authPage.scss);
+
 //Home Page Components Styling
 @import url(homeCompStyling/mainPage.scss);
 @import url(homeCompStyling/footer.scss);
@@ -51,6 +53,7 @@ p {
 @import url(profileCompStyling/profileNav.scss);
 @import url(profileCompStyling/profileScreen.scss);
 @import url(profileCompStyling/calender.scss);
+@import url(profileCompStyling/archives.scss);
 
 .btn {
   border: none;

@@ -5,6 +5,7 @@ import Home from "./sourcePages/homePage";
 import StockPage from "./sourcePages/stockPage";
 import StockAnalysisPage from "./sourcePages/stockAnalysisPage";
 import ProfilePage from "./sourcePages/profilePage";
+import Archives from "./userProfileComponent/archives";
 import { useState } from "react";
 import RefrshHandler from "./refrshHandler";
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/stockPage/:stockName" element={<StockPage />} />
         <Route path="/stockAnalysisPage" element={<StockAnalysisPage />} />
         <Route path="/ProfilePage" element={<ProfilePage />} />
+        <Route path="/Archive" element={<Archives />} />
       </Routes>
     </div>
   );

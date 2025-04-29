@@ -1,8 +1,11 @@
 .profile-screen {
   margin-top: 80px;
-  padding: 20px;
+  padding: 2rem;
   display: flex;
-  gap: 30px;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #f0f4f8, #e9eff5);
+  min-height: 100vh;
 
   .left-side,
   .right-side {
@@ -10,84 +13,111 @@
 
     h2 {
       padding-left: 6vh;
-      padding-bottom: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      color: #2c3e50;
     }
   }
 
   .edit-info,
   .archive,
   .stock-status {
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
-    padding: 25px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
   }
 
   .avatar-wrapper {
     position: relative;
-    width: 120px;
-    height: 120px;
-    margin-bottom: 15px;
+    width: 130px;
+    height: 130px;
+    margin-bottom: 1rem;
 
     .avatar {
       width: 100%;
       height: 100%;
       border-radius: 50%;
       background: url("../../../public/userImg.avif") center/cover no-repeat;
-      border: 3px solid #ccc;
+      border: 3px solid #e1e1e1;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
     .edit-avatar-btn {
       position: absolute;
-      bottom: 5px;
-      right: 5px;
-      background: #0099ff;
+      bottom: 6px;
+      right: 6px;
+      background: #3498db;
       color: #fff;
       border: none;
       border-radius: 50%;
       cursor: pointer;
-      padding: 5px;
-      transition: 0.3s;
+      padding: 6px;
+      font-size: 14px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      transition: 0.3s ease;
 
       &:hover {
-        background: #0056b3;
+        background: #216fa0;
       }
     }
   }
 
-  .edit-btn {
-    color: #fff;
-    border: none;
-    padding: 12px 18px;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    &:hover {
-      background-color: #0056b3;
+  .user-info {
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: #555;
+
+    p {
+      margin-bottom: 8px;
+
+      strong {
+        color: #2c3e50;
+      }
     }
   }
-  .explore-btn {
-    color: #fff;
+
+  .btn {
+    padding: 12px 20px;
     border: none;
-    padding: 12px 18px;
-    margin-top: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: 0.3s;
+    background-color: #1abc9c;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(26, 188, 156, 0.3);
+    transition: all 0.3s ease;
+
     &:hover {
-      background-color: #0056b3;
+      background-color: #16a085;
+      transform: translateY(-2px);
+    }
+  }
+
+  .edit-btn {
+    margin-top: 1rem;
+  }
+
+  .explore-btn {
+    margin-top: 1rem;
+    background-color: #9b59b6;
+
+    &:hover {
+      background-color: #8e44ad;
     }
   }
 }
 
+/* 📱 Responsive Layout */
 @media (max-width: 768px) {
   .profile-screen {
     flex-direction: column;
-    gap: 20px;
+    gap: 2rem;
 
     .left-side,
     .right-side {
-      flex: none;
       width: 100%;
     }
 
@@ -96,37 +126,36 @@
       height: 100px;
     }
 
-    .edit-btn,
-    .explore-btn {
-      padding: 10px 15px;
+    .btn {
+      width: 100%;
+      font-size: 0.9rem;
     }
 
     .user-info {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-
-      p {
-        display: block;
-        font-size: 14px;
-      }
+      display: block;
+      font-size: 0.95rem;
+      color: #333;
     }
   }
 }
 
 @media (max-width: 480px) {
   .profile-screen {
-    padding: 15px;
+    padding: 1rem;
 
     .avatar-wrapper {
       width: 80px;
       height: 80px;
     }
 
-    .edit-btn,
-    .explore-btn {
-      padding: 8px 12px;
-      font-size: 14px;
+    .btn {
+      padding: 10px 16px;
+    }
+
+    .user-info {
+      p {
+        font-size: 0.9rem;
+      }
     }
   }
 }

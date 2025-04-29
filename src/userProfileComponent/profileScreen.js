@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Calendar from "./calender";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileScreen() {
   const [userEmail, setUserEmail] = useState("");
   const [loggedInUser, setLoggedInUser] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
@@ -13,10 +15,14 @@ export default function ProfileScreen() {
     }
   }, []);
 
+  const handleExploreClick = () => {
+    navigate("/Archive");
+  };
+
   return (
     <div className="profile-screen">
       <div className="left-side">
-        <h2>Edit Info</h2>
+        <h2>Personalize Your Profile</h2>
         <div className="edit-info">
           <div className="edit-container">
             <div className="avatar-wrapper">
@@ -31,19 +37,21 @@ export default function ProfileScreen() {
                 <strong>Email Id:</strong> {userEmail || "Not Available"}
               </p>
             </div>
-            <button className="edit-btn btn">Edit</button>
+            <button className="edit-btn btn">Edit Profile</button>
           </div>
         </div>
 
-        <h2>Explore Archive</h2>
+        <h2>Discover Your Archive</h2>
         <div className="archive">
-          <p>Go through your favourite stocks</p>
-          <button className="explore-btn btn">Explore</button>
+          <p>Browse and manage your favorite stocks effortlessly.</p>
+          <button className="explore-btn btn" onClick={handleExploreClick}>
+            Explore Archive
+          </button>
         </div>
       </div>
 
       <div className="right-side">
-        <h2>Created Stock's Status</h2>
+        <h2>Track Your Stock Performance</h2>
         <div className="stock-status">
           <Calendar />
         </div>

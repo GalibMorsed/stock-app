@@ -15,6 +15,10 @@ const stocksCreated = new Schema({
     type: Date,
     default: Date.now,
   },
+  isArchived: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const productModel = mongoose.model("CreatedStocks", stocksCreated);

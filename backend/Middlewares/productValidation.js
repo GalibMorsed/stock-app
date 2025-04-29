@@ -5,6 +5,7 @@ const productValidation = (req, res, next) => {
     name: Joi.string().min(3).max(100).required(),
     stock: Joi.string().min(3).max(100).required(),
     date: Joi.date().required(),
+    isArchived: Joi.boolean().optional(),
   });
 
   const { error } = schema.validate(req.body);

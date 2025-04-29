@@ -7,19 +7,24 @@ export default function Footer() {
       <div className="container">
         <div className="footer-content">
           <p>
-            &copy; {new Date().getFullYear()} StockNest Company. All rights are
-            reserved to Galib Morsed.
+            &copy; {new Date().getFullYear()} StockNest. All rights reserved.
           </p>
           <nav>
             <ul>
               <li>
-                <Link to="/">About Me</Link>
+                <Link to="/" className="footer-link">
+                  About Me
+                </Link>
               </li>
               <li>
-                <Link to="/">Services</Link>
+                <Link to="/" className="footer-link">
+                  Services
+                </Link>
               </li>
               <li>
-                <Link to="/">Contact Me</Link>
+                <Link to="/" className="footer-link">
+                  Contact Me
+                </Link>
               </li>
             </ul>
           </nav>

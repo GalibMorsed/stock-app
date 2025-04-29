@@ -175,6 +175,32 @@ export default function StockScreen() {
     setEditedData(updatedData);
   };
 
+  const archiveStock = async () => {
+    try {
+      const res = await fetch("http://localhost:6060/product/archived", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          stock: stockName,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert("Stock archived successfully.");
+      } else {
+        alert(result.message || "Failed to archive.");
+      }
+    } catch (err) {
+      console.error("Archiving error:", err);
+      alert("Something went wrong while archiving.");
+    }
+  };
+
   return (
     <div className="stock-page">
       <div className="stock-buttons">
@@ -193,10 +219,7 @@ export default function StockScreen() {
         )}
         <button className="btn sort">Sort</button>
         <button className="btn search">Search</button>
-        <button
-          className="btn archive"
-          onClick={() => alert("This table is Archived successfully.")}
-        >
+        <button className="btn archive" onClick={archiveStock}>
           Archive
         </button>
         <button className="btn delete" onClick={handleDelete}>

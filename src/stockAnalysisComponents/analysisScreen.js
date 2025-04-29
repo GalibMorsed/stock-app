@@ -43,7 +43,7 @@ export default function AnalysisScreen() {
   return (
     <div className="analysis-screen">
       <h3 className="instruction">
-        Please Select the Dates for which the statement is to be generated.
+        Please Select the both Dates for which the statement is to be generated.
       </h3>
 
       <div className="input-section">
@@ -70,36 +70,35 @@ export default function AnalysisScreen() {
       {analysisData.length > 0 && (
         <div className="analysis-table">
           <h4>Analysis Results</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Stock Name</th>
-                <th>Created Date</th>
-                <th>Has Table</th>
-                <th>Row Count</th>
-                <th>Column Count</th>
-              </tr>
-            </thead>
-            <tbody>
-              {analysisData.map((stock, i) => (
-                <tr key={i}>
-                  <td>
-                    {stock.hasTable ? (
-                      <Link to={`/stockPage/${stock.stockName}`}>
-                        {stock.stockName}
-                      </Link>
-                    ) : (
-                      stock.stockName
-                    )}
-                  </td>
-                  <td>{new Date(stock.createdDate).toLocaleDateString()}</td>
-                  <td>{stock.hasTable ? "Yes" : "No"}</td>
-                  <td>{stock.hasTable ? stock.rowCount : "-"}</td>
-                  <td>{stock.hasTable ? stock.colCount : "-"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {analysisData.map((stock, i) => (
+            <div key={i} className="card">
+              <p>
+                <strong>Stock Name:</strong>{" "}
+                {stock.hasTable ? (
+                  <Link to={`/stockPage/${stock.stockName}`}>
+                    {stock.stockName}
+                  </Link>
+                ) : (
+                  stock.stockName
+                )}
+              </p>
+              <p>
+                <strong>Created Date:</strong>{" "}
+                {new Date(stock.createdDate).toLocaleDateString()}
+              </p>
+              <p>
+                <strong>Has Table:</strong> {stock.hasTable ? "Yes" : "No"}
+              </p>
+              <p>
+                <strong>Row Count:</strong>{" "}
+                {stock.hasTable ? stock.rowCount : "-"}
+              </p>
+              <p>
+                <strong>Column Count:</strong>{" "}
+                {stock.hasTable ? stock.colCount : "-"}
+              </p>
+            </div>
+          ))}
         </div>
       )}
     </div>
