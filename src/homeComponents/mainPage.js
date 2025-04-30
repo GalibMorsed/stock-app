@@ -27,6 +27,14 @@ export default function MainPage() {
     }
   }, [isSidebarOpen]);
 
+  useEffect(() => {
+    if (isStockFormVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isStockFormVisible]);
+
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarOpen);
   };
@@ -120,38 +128,44 @@ export default function MainPage() {
       <div className="inventory-info">
         <p>Inventory Summary</p>
         <p>Total Stocks Created - {totalStocks}</p>
-        <p>Total Sale - 43</p>
+        <p>Total Sale - 0</p>
       </div>
 
       {isStockFormVisible && (
-        <div className="stock-form">
-          <h2>Create a New Stock</h2>
-          <label>Stock Name</label>
-          <input
-            type="text"
-            placeholder="Enter stock name"
-            value={stockName}
-            onChange={(e) => setStockName(e.target.value)}
-          />
-          <label>Date</label>
-          <input
-            type="date"
-            id="date"
-            value={selectedDate}
-            onChange={(e) => setSelectedDate(e.target.value)}
-          />
-          <div className="create-btn">
-            <button className="btn" onClick={createStock}>
-              Create
-            </button>
-            <button
-              className="btn cancel"
-              onClick={() => setStockFormVisible(false)}
-            >
-              Cancel
-            </button>
+        <>
+          <div
+            className="stock-form-overlay show"
+            onClick={() => setStockFormVisible(false)}
+          ></div>
+          <div className="stock-form">
+            <h2>Create a New Stock</h2>
+            <label>Stock Name</label>
+            <input
+              type="text"
+              placeholder="Enter stock name"
+              value={stockName}
+              onChange={(e) => setStockName(e.target.value)}
+            />
+            <label>Date</label>
+            <input
+              type="date"
+              id="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+            />
+            <div className="create-btn">
+              <button className="btn" onClick={createStock}>
+                Create
+              </button>
+              <button
+                className="btn cancel"
+                onClick={() => setStockFormVisible(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

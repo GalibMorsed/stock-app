@@ -87,7 +87,7 @@ function LoginPage() {
             Login
           </button>
           <span>
-            <Link to="/">Forgot Password?</Link>
+            <Link to="/forgotPassword">Forgot Password?</Link>
           </span>
           <span>
             Don't have an account? <Link to="/signin"> Create Account</Link>

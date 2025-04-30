@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./authPages/loginPage";
 import Signin from "./authPages/signinPage";
+import ForgotPassword from "./authPages/forgotPassword";
 import Home from "./sourcePages/homePage";
 import StockPage from "./sourcePages/stockPage";
 import StockAnalysisPage from "./sourcePages/stockAnalysisPage";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/home" element={<PrivateRoute element={<Home />} />} />
         <Route path="/stockPage/:stockName" element={<StockPage />} />
         <Route path="/stockAnalysisPage" element={<StockAnalysisPage />} />

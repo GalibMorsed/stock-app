@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function ProfileNav() {
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
 
   const handleDeleteAccount = async () => {
     const name = localStorage.getItem("loggedInUser");
@@ -11,14 +12,12 @@ export default function ProfileNav() {
       alert("No user found in localStorage");
       return;
     }
-    const confirmation = window.confirm(
-      "Are you sure you want to delete your account? This action is irreversible, and all your data will be permanently removed from this platform."
-    );
 
-    if (!confirmation) {
-      return;
-    }
+    setShowModal(true);
+  };
 
+  const confirmDelete = async () => {
+    const name = localStorage.getItem("loggedInUser");
     try {
       await axios.delete("http://localhost:6060/auth/deleteAccount", {
         data: { name: name },
@@ -33,6 +32,8 @@ export default function ProfileNav() {
         error.response?.data?.message ||
           "Failed to delete account. Please try again later."
       );
+    } finally {
+      setShowModal(false);
     }
   };
 
@@ -47,6 +48,30 @@ export default function ProfileNav() {
           Delete Account
         </button>
       </div>
+
+      {showModal && (
+        <div className="profile-modal-overlay">
+          <div className="profile-modal">
+            <h2>Warning</h2>
+            <p>
+              Are you sure you want to delete your account? This action is
+              irreversible, and all your data will be permanently removed from
+              this platform.
+            </p>
+            <div className="profile-modal-actions">
+              <button className="btn confirm-btn" onClick={confirmDelete}>
+                Confirm
+              </button>
+              <button
+                className="btn cancel-btn"
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

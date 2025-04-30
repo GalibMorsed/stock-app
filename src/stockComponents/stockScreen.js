@@ -7,6 +7,8 @@ export default function StockScreen() {
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState([]);
   const [noTable, setNoTable] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [rowToDelete, setRowToDelete] = useState(null);
 
   const { stockName } = useParams();
   const name = localStorage.getItem("loggedInUser");
@@ -99,11 +101,10 @@ export default function StockScreen() {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this table? This action cannot be undone and all data associated with this table will be permanently lost."
-    );
-    if (!confirmDelete) return;
+    setShowModal(true);
+  };
 
+  const confirmDelete = async () => {
     try {
       const res = await fetch(
         `http://localhost:6060/table/deleteTable?name=${name}&stockName=${stockName}`,
@@ -120,23 +121,25 @@ export default function StockScreen() {
     } catch (error) {
       console.error("Delete failed:", error);
       alert("Something went wrong during deletion.");
+    } finally {
+      setShowModal(false);
     }
   };
 
   const handleDeleteRow = async (rowIdx) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this row?"
-    );
-    if (!confirmDelete) return;
+    setRowToDelete(rowIdx);
+    setShowModal(true);
+  };
 
-    const updatedData = editedData.filter((_, index) => index !== rowIdx);
+  const confirmDeleteRow = async () => {
+    const updatedData = editedData.filter((_, index) => index !== rowToDelete);
     try {
       const res = await fetch(
         `http://localhost:6060/table/deleteRow?name=${name}&stockName=${stockName}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ row: editedData[rowIdx] }),
+          body: JSON.stringify({ row: editedData[rowToDelete] }),
         }
       );
 
@@ -150,6 +153,9 @@ export default function StockScreen() {
     } catch (err) {
       console.error("Error deleting row:", err);
       alert("Something went wrong while deleting the row.");
+    } finally {
+      setShowModal(false);
+      setRowToDelete(null);
     }
   };
 
@@ -170,11 +176,14 @@ export default function StockScreen() {
       return;
     }
 
-    const updatedColumns = [...columns, newColName];
-    const updatedData = editedData.map((row) => ({
-      ...row,
-      [newColName]: "",
-    }));
+    const updatedColumns = [...columns, newColName]; // Add the new column at the end
+    const updatedData = editedData.map((row) => {
+      const newRow = {};
+      updatedColumns.forEach((col) => {
+        newRow[col] = row[col] || ""; // Ensure all columns are in the correct order
+      });
+      return newRow;
+    });
 
     setColumns(updatedColumns);
     setEditedData(updatedData);
@@ -295,6 +304,38 @@ export default function StockScreen() {
           Share
         </button>
       </div>
+
+      {showModal && (
+        <div className="stock-modal-overlay">
+          <div className="stock-modal">
+            <h2>Warning</h2>
+            <p>
+              {rowToDelete !== null
+                ? "Are you sure you want to delete this row?"
+                : "Are you sure you want to delete this table? This action cannot be undone and all data associated with this table will be permanently lost."}
+            </p>
+            <div className="stock-modal-actions">
+              <button
+                className="btn confirm-btn"
+                onClick={
+                  rowToDelete !== null ? confirmDeleteRow : confirmDelete
+                }
+              >
+                Confirm
+              </button>
+              <button
+                className="btn cancel-btn"
+                onClick={() => {
+                  setShowModal(false);
+                  setRowToDelete(null);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

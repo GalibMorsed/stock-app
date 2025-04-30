@@ -2,6 +2,7 @@ const {
   signin,
   login,
   deleteAccount,
+  updatePassword,
 } = require("../Controllers/AuthController");
 const {
   signinValidation,
@@ -14,5 +15,6 @@ const router = Router();
 router.post("/login", loginValidation, login);
 router.post("/signin", signinValidation, signin);
 router.delete("/deleteAccount", deleteAccount);
+router.post("/update-password", updatePassword);
 
 module.exports = router;
