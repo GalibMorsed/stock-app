@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="container">
+      <div className="footer-container">
         <div className="footer-content">
           <p>
-            &copy; {new Date().getFullYear()} StockNest. All rights reserved.
+            &copy; {new Date().getFullYear()} StockNest Platform. All rights
+            reserved to - <strong>Galib Morsed</strong>.
           </p>
           <nav>
             <ul>
