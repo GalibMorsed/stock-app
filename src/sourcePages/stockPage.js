@@ -10,12 +10,12 @@ export default function StockPage() {
   return (
     <div>
       <StockNav onCreateTable={() => setShowCreateTable(true)} />
-      <StockSidebar />
       {showCreateTable ? (
         <CreateTable onFinish={() => setShowCreateTable(false)} />
       ) : (
         <StockScreen />
       )}
+      <StockSidebar />
     </div>
   );
 }

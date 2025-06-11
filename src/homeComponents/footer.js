@@ -7,13 +7,12 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-content">
           <p>
-            &copy; {new Date().getFullYear()} StockNest Platform. All rights
-            reserved to - <strong>Galib Morsed</strong>.
+            &copy; {new Date().getFullYear()} StockNest. All rights reserved.
           </p>
           <nav>
             <ul>
               <li>
-                <Link to="/" className="footer-link">
+                <Link to="/AboutMe" className="footer-link">
                   About Me
                 </Link>
               </li>
@@ -23,7 +22,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/" className="footer-link">
+                <Link to="/AboutMe" className="footer-link">
                   Contact Me
                 </Link>
               </li>
