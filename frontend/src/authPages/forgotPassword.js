@@ -29,7 +29,7 @@ function ForgotPassword() {
     }
 
     try {
-      const url = "http://localhost:6060/auth/update-password";
+      const url = "https://stock-nest-kpfy.onrender.com/auth/update-password";
       const response = await fetch(url, {
         method: "POST",
         headers: {

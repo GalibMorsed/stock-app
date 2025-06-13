@@ -19,9 +19,12 @@ export default function ProfileNav() {
   const confirmDelete = async () => {
     const name = localStorage.getItem("loggedInUser");
     try {
-      await axios.delete("http://localhost:6060/auth/deleteAccount", {
-        data: { name: name },
-      });
+      await axios.delete(
+        "https://stock-nest-kpfy.onrender.com/auth/deleteAccount",
+        {
+          data: { name: name },
+        }
+      );
       localStorage.removeItem("loggedInUser");
       localStorage.removeItem("userEmail");
       localStorage.removeItem("token");

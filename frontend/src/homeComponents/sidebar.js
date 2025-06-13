@@ -15,7 +15,7 @@ export default function Sidebar({ isOpen, close, updateTotalStocks }) {
       }
 
       try {
-        const url = `http://localhost:6060/product/userData?name=${name}`;
+        const url = `https://stock-nest-kpfy.onrender.com/product/userData?name=${name}`;
         const response = await fetch(url, {
           method: "GET",
           headers: { "Content-Type": "application/json" },

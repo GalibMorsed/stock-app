@@ -28,7 +28,7 @@ function LoginPage() {
     }
 
     try {
-      const url = "http://localhost:6060/auth/login";
+      const url = "https://stock-nest-kpfy.onrender.com/auth/login";
       const response = await fetch(url, {
         method: "POST",
         headers: {

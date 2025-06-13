@@ -16,7 +16,7 @@ export default function StockNav({ onCreateTable }) {
 
       try {
         const response = await fetch(
-          `http://localhost:6060/product/userData?name=${name}`
+          `https://stock-nest-kpfy.onrender.com/product/userData?name=${name}`
         );
 
         if (!response.ok) throw new Error("Failed to fetch stock data");

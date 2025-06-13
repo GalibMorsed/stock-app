@@ -57,7 +57,7 @@ export default function MainPage() {
     const newStock = { name, stock: stockName, date: selectedDate };
 
     try {
-      const url = "http://localhost:6060/product/storeData";
+      const url = "https://stock-nest-kpfy.onrender.com/product/storeData";
       const response = await fetch(url, {
         method: "POST",
         headers: {

@@ -21,7 +21,7 @@ export default function AnalysisScreen() {
 
     try {
       const res = await fetch(
-        `http://localhost:6060/table/stockAnalysis?name=${name}&startDate=${startDate}&endDate=${endDate}`
+        `https://stock-nest-kpfy.onrender.com/table/stockAnalysis?name=${name}&startDate=${startDate}&endDate=${endDate}`
       );
       const data = await res.json();
 

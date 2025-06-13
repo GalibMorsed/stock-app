@@ -45,7 +45,7 @@ const CreateTable = ({ onFinish }) => {
     };
 
     try {
-      const url = "http://localhost:6060/table/storeTable";
+      const url = "https://stock-nest-kpfy.onrender.com/table/storeTable";
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

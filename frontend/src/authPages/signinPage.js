@@ -29,7 +29,7 @@ function SigninPage() {
     }
 
     try {
-      const url = "http://localhost:6060/auth/signin";
+      const url = "https://stock-nest-kpfy.onrender.com/auth/signin";
       const response = await fetch(url, {
         method: "POST",
         headers: {

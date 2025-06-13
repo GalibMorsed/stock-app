@@ -9,11 +9,14 @@ export default function Archives() {
   useEffect(() => {
     const fetchArchived = async () => {
       try {
-        const res = await fetch("http://localhost:6060/product/getarchive", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name }),
-        });
+        const res = await fetch(
+          "https://stock-nest-kpfy.onrender.com/product/getarchive",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name }),
+          }
+        );
         const data = await res.json();
         if (Array.isArray(data)) {
           setArchivedStocks(data);
@@ -32,11 +35,14 @@ export default function Archives() {
 
   const handleUnarchive = async (stockName) => {
     try {
-      const res = await fetch("http://localhost:6060/product/unarchive", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, stock: stockName }),
-      });
+      const res = await fetch(
+        "https://stock-nest-kpfy.onrender.com/product/unarchive",
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, stock: stockName }),
+        }
+      );
 
       const result = await res.json();
 

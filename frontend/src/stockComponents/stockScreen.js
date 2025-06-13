@@ -35,7 +35,7 @@ export default function StockScreen() {
     const fetchTable = async () => {
       try {
         const res = await fetch(
-          `http://localhost:6060/table/fetchTable?name=${name}&stockName=${stockName}`
+          `https://stock-nest-kpfy.onrender.com/table/fetchTable?name=${name}&stockName=${stockName}`
         );
         const data = await res.json();
 
@@ -74,7 +74,7 @@ export default function StockScreen() {
   const handleUpdate = async () => {
     try {
       const res = await fetch(
-        `http://localhost:6060/table/editTable?name=${name}&stockName=${stockName}`,
+        `https://stock-nest-kpfy.onrender.com/table/editTable?name=${name}&stockName=${stockName}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -107,7 +107,7 @@ export default function StockScreen() {
   const confirmDelete = async () => {
     try {
       const res = await fetch(
-        `http://localhost:6060/table/deleteTable?name=${name}&stockName=${stockName}`,
+        `https://stock-nest-kpfy.onrender.com/table/deleteTable?name=${name}&stockName=${stockName}`,
         { method: "DELETE" }
       );
       const result = await res.json();
@@ -135,7 +135,7 @@ export default function StockScreen() {
     const updatedData = editedData.filter((_, index) => index !== rowToDelete);
     try {
       const res = await fetch(
-        `http://localhost:6060/table/deleteRow?name=${name}&stockName=${stockName}`,
+        `https://stock-nest-kpfy.onrender.com/table/deleteRow?name=${name}&stockName=${stockName}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -191,16 +191,19 @@ export default function StockScreen() {
 
   const archiveStock = async () => {
     try {
-      const res = await fetch("http://localhost:6060/product/archived", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          stock: stockName,
-        }),
-      });
+      const res = await fetch(
+        "https://stock-nest-kpfy.onrender.com/product/archived",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            stock: stockName,
+          }),
+        }
+      );
 
       const result = await res.json();
 
