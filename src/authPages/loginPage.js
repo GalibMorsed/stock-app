@@ -13,7 +13,6 @@ function LoginPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setLoginInfo((prevState) => ({
       ...prevState,
       [name]: value,

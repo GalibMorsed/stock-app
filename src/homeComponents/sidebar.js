@@ -28,7 +28,6 @@ export default function Sidebar({ isOpen, close, updateTotalStocks }) {
         const data = await response.json();
         setUserData(data);
         updateTotalStocks(data.length); // Send stock count to MainPage
-        console.log("Data fetched successfully:", data);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }

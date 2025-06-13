@@ -25,7 +25,6 @@ export default function AnalysisScreen() {
       );
       const data = await res.json();
 
-      console.log("Fetched Data:", data);
       if (!data || data.length === 0) {
         setNoData(true);
         setAnalysisData([]);

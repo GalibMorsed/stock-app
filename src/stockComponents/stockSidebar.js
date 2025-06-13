@@ -27,7 +27,6 @@ export default function StockSidebar() {
 
         const data = await response.json();
         setUserData(data);
-        console.log("Data fetched successfully:", data);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
