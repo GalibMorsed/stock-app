@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/index.js",
+    "start": "node backend/index.js",
     "dev": "nodemon backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install --legacy-peer-deps && npm install --prefix frontend --legacy-peer-deps && npm run build --prefix frontend"
