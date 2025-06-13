@@ -1,0 +1,87 @@
+:root {
+  --background-color: #fff;
+  --background-light: #fff;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --primary-color: #3a99ff;
+  --text-color: #0a0a0a;
+  --text-light: #575757;
+  --font-size: 16px;
+  --animation-speed: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  object-fit: cover;
+}
+body {
+  font-size: var(--font-size);
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-light);
+}
+a {
+  text-decoration: none;
+}
+p {
+  font-weight: bolder;
+  color: var(--text-color);
+}
+
+// Login & Signin Page Components Styling
+@import url(authPage.scss);
+
+//Home Page Components Styling
+@import url(homeCompStyling/mainPage.scss);
+@import url(homeCompStyling/footer.scss);
+@import url(homeCompStyling/navbar.scss);
+@import url(homeCompStyling/sidebar.scss);
+@import url(homeCompStyling/aboutMe.scss);
+
+//Stock Page Components Styling
+@import url(stockCompStyling/stockScreen.scss);
+@import url(stockCompStyling/stockSidebar.scss);
+@import url(stockCompStyling/stockNav.scss);
+@import url(stockCompStyling/createTable.scss);
+
+//Stock Analysis Components Styling
+@import url(stAnalysiscompStyling/analysisNav.scss);
+@import url(stAnalysiscompStyling/analysisScreen.scss);
+
+//User Profile Components Styling
+@import url(profileCompStyling/profileNav.scss);
+@import url(profileCompStyling/profileScreen.scss);
+@import url(profileCompStyling/calender.scss);
+@import url(profileCompStyling/archives.scss);
+
+.btn {
+  border: none;
+  outline: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.75em 1em;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  &:hover {
+    box-shadow: 0 1px 3px var(--shadow-color);
+  }
+}
+.custom-img {
+  background-color: rgb(163, 132, 132);
+  height: 0;
+  width: 100%;
+  position: relative;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
